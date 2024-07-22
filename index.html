@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Roguelike Game</title>
+    <style>
+        #game-container {
+            font-family: monospace;
+            white-space: pre;
+            line-height: 1;
+        }
+        .movement-button {
+            font-size: 18px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container"></div>
+    <div id="inventory"></div>
+    <div id="movement-buttons">
+        <button class="movement-button" id="up">Up</button>
+        <button class="movement-button" id="left">Left</button>
+        <button class="movement-button" id="right">Right</button>
+        <button class="movement-button" id="down">Down</button>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
