@@ -2,9 +2,19 @@
 const gameState = {
     map: [],
     player: { x: 0, y: 0 },
-    viewWidth: 5,
-    viewHeight: 5,
+    viewWidth: 10,
+    viewHeight: 10,
     inventory: []
+};
+
+const icons = {
+  player: '@',
+  coin: '$',
+  potion: '*',
+  chest: '!',
+  empty: ' ',
+  wall: '#',
+  floor: '.', 
 };
 
 // Load map from file
@@ -16,7 +26,7 @@ async function loadMap(filename) {
         
         // Find player starting position
         for (let y = 0; y < gameState.map.length; y++) {
-            const x = gameState.map[y].indexOf('@');
+            const x = gameState.map[y].indexOf(icons['player']);
             if (x !== -1) {
                 gameState.player = { x, y };
                 break;
@@ -50,7 +60,7 @@ function validateMap() {
             if (!['#', '.', '@', '$', '*', '!'].includes(tile)) {
                 throw new Error(`Invalid character "${tile}" at position (${x}, ${y})`);
             }
-            if (tile === '@') {
+            if (tile === icons['player']) {
                 playerCount++;
             }
         }
@@ -76,7 +86,7 @@ function renderGame() {
             if (mapX >= 0 && mapX < gameState.map[0].length && mapY >= 0 && mapY < gameState.map.length) {
                 visibleMap += gameState.map[mapY][mapX];
             } else {
-                visibleMap += " ";
+                visibleMap += icons['empty'];
             }
         }
         visibleMap += "<br>";
@@ -92,26 +102,26 @@ function movePlayer(dx, dy) {
     
     if (newX >= 0 && newX < gameState.map[0].length && newY >= 0 && newY < gameState.map.length) {
         const targetTile = gameState.map[newY][newX];
-        if (targetTile !== "#") {
-            gameState.map[gameState.player.y] = gameState.map[gameState.player.y].substring(0, gameState.player.x) + "." + 
+        if (targetTile !== icons['wall']) {
+            gameState.map[gameState.player.y] = gameState.map[gameState.player.y].substring(0, gameState.player.x) + icons['floor'] + 
                                                 gameState.map[gameState.player.y].substring(gameState.player.x + 1);
             gameState.player.x = newX;
             gameState.player.y = newY;
             
             // Handle object interactions
             switch(targetTile) {
-                case "$":
+                case icons['coin']:
                     gameState.inventory.push("Coin");
                     break;
-                case "*":
+                case icons['potion']:
                     gameState.inventory.push("Potion");
                     break;
-                case "!":
+                case icons['chest']:
                     alert("You found a chest!");
                     break;
             }
             
-            gameState.map[newY] = gameState.map[newY].substring(0, newX) + "@" + gameState.map[newY].substring(newX + 1);
+            gameState.map[newY] = gameState.map[newY].substring(0, newX) + icons['player'] + gameState.map[newY].substring(newX + 1);
             renderGame();
             renderInventory();
         }
