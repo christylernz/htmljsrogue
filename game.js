@@ -89,7 +89,7 @@ function renderGame() {
                 visibleMap += icons['empty'];
             }
         }
-        visibleMap += "<br>";
+        visibleMap += "<br/>";
     }
     
     gameContainer.innerHTML = visibleMap;
@@ -130,7 +130,7 @@ function movePlayer(dx, dy) {
 
 function renderInventory() {
     const inventoryContainer = document.getElementById("inventory");
-    inventoryContainer.textContent = "Inventory: " + gameState.inventory.join(", ");
+    inventoryContainer.innerHTML = gameState.inventory.map(item => `<div class="item">${item}</div>`).join("");
 }
 
 // Set up event listeners for player movement

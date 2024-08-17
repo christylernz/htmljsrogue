@@ -7,12 +7,12 @@
     <style>
         #game-container {
             font-family: monospace;
-            font-size: 48px;
+            font-size: 52px;
             white-space: pre;
             line-height: 1;
             border-style: solid;
             float: left;
-            margin: 10px;
+            margin: 20px;
             border-radius: 5px;
         }
         #movement-buttons {
@@ -21,7 +21,20 @@
           align-items: center;
           width: 25%;
           margin: 0;
-        } 
+        }
+        #inventory {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 25%;
+        }
+        .item {
+         border: 1px solid;
+         padding: 10px;
+         border-radius: 5px;
+         text-align: center;
+         background: floralwhite;
+        }
         .row {
           display: flex;
           justify-content: center;
@@ -39,7 +52,6 @@
 </head>
 <body>
     <div id="game-container"></div>
-    <div id="inventory"></div>
     <div id="movement-buttons">
       <div class="row">
         <button class="movement-button" id="up">Up</button>
@@ -52,6 +64,8 @@
         <button class="movement-button" id="down">Down</button>
       </div>
     </div>
+    <h2>Inventory</h2>
+    <div id="inventory"></div> 
     <script src="game.js"></script>
 </body>
 </html>
