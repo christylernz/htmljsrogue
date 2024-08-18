@@ -57,7 +57,7 @@ function validateMap() {
 
         for (let x = 0; x < mapWidth; x++) {
             const tile = gameState.map[y][x];
-            if (!['#', '.', '@', '$', '*', '!'].includes(tile)) {
+            if (!Object.values(icons) .includes(tile)) {
                 throw new Error(`Invalid character "${tile}" at position (${x}, ${y})`);
             }
             if (tile === icons['player']) {
