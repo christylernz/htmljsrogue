@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'Square';
+    src: URL('square.ttf') format('truetype');
+  } 
+  #game-container {
+      font-family: Square;
+      font-size: 52px;
+      white-space: pre;
+      line-height: 1;
+      border-style: solid;
+      float: left;
+      margin: 20px;
+      border-radius: 5px;
+  }
+  #movement-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    margin: 0;
+  }
+  #inventory {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 25%;
+  }
+  .item {
+   border: 1px solid;
+   padding: 10px;
+   border-radius: 5px;
+   text-align: center;
+   background: floralwhite;
+  }
+  .row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0;
+  } 
+  .movement-button {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0 5px;
+      padding: 15px;
+      width: 40%;
+  }
