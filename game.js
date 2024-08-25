@@ -37,7 +37,7 @@ async function loadMap(filename) {
         renderGame();
         renderInventory();
     } catch (error) {
-        console.error('Error loading map:', error);
+        console.error('Error loading map:', error.message);
     }
 }
 
@@ -52,14 +52,14 @@ function validateMap() {
 
     for (let y = 0; y < gameState.map.length; y++) {
         if (gameState.map[y].length !== mapWidth) {
-            throw new Error(`Row ${y} has inconsistent length`);
+            throw new Error(`Row ${y} has inconsistent length: want ${mapWidth} got ${gameState.map[y].length }`);
         }
 
         for (let x = 0; x < mapWidth; x++) {
             const tile = gameState.map[y][x];
-            if (!Object.values(icons) .includes(tile)) {
+            /*if (!Object.values(icons) .includes(tile)) {
                 throw new Error(`Invalid character "${tile}" at position (${x}, ${y})`);
-            }
+            }*/
             if (tile === icons['player']) {
                 playerCount++;
             }
@@ -150,4 +150,4 @@ document.getElementById("left").addEventListener("click", () => movePlayer(-1, 0
 document.getElementById("right").addEventListener("click", () => movePlayer(1, 0));
 
 // Initialize the game
-loadMap('map.txt');
+loadMap('explore.txt');
