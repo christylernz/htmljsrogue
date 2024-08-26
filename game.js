@@ -150,4 +150,4 @@ document.getElementById("left").addEventListener("click", () => movePlayer(-1, 0
 document.getElementById("right").addEventListener("click", () => movePlayer(1, 0));
 
 // Initialize the game
-loadMap('explore.txt');
+loadMap('map.txt');
