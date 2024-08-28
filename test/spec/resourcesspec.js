@@ -1,6 +1,6 @@
-//test/spec/calcspec.js
-
-describe("Given the decision tree contains no animals or distinguishing questions.", function(){
+//test/spec/resourcesspec.js
+import { helloWorld } from "/resources.js";
+/* describe("Given the decision tree contains no animals or distinguishing questions.", function(){
   var someString;
   beforeEach(function() {
       someString = "foo";
@@ -13,11 +13,11 @@ describe("Given the decision tree contains no animals or distinguishing question
           expect(someString).toBe("foobar");
       });
   });
-});
+}); */
 
 describe("hello this is the World", () => {
-    it("returns hello world", () => {
-      var actual = helloWorld();
-      expect(actual).toBe("hello world");
-    });
-  })
+  it("returns hello world", () => {
+    var actual = helloWorld();
+    expect(actual).toBe("hello world");
+  });
+})

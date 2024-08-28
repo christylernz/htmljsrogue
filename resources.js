@@ -7,3 +7,7 @@ export const icons = {
     wall: '#',
     floor: '.',
 };
+
+export function helloWorld() {
+    return "hello world";
+}
