@@ -1,5 +1,5 @@
 //test/spec/resourcesspec.js
-import { helloWorld } from "/resources.js";
+import { helloWorld } from "../../resources.js";
 /* describe("Given the decision tree contains no animals or distinguishing questions.", function(){
   var someString;
   beforeEach(function() {
