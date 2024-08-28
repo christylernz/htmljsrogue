@@ -1,3 +1,4 @@
+import * as resources from "./resources.js";
 // Game state
 const gameState = {
     map: [],
@@ -7,15 +8,7 @@ const gameState = {
     inventory: []
 };
 
-const icons = {
-  player: '@',
-  coin: '$',
-  potion: '*',
-  chest: '!',
-  empty: ' ',
-  wall: '#',
-  floor: '.', 
-};
+
 
 // Load map from file
 async function loadMap(filename) {
@@ -23,21 +16,21 @@ async function loadMap(filename) {
         const response = await fetch(filename);
         const mapText = await response.text();
         gameState.map = mapText.trim().split('\n');
-        
+
         // Find player starting position
         for (let y = 0; y < gameState.map.length; y++) {
-            const x = gameState.map[y].indexOf(icons['player']);
+            const x = gameState.map[y].indexOf(resources.icons['player']);
             if (x !== -1) {
                 gameState.player = { x, y };
                 break;
             }
         }
-        
+
         validateMap();
         renderGame();
         renderInventory();
     } catch (error) {
-        console.error('Error loading map:', error.message);
+        console.error('Error loading map:', error.message + "\n" + error.stack);
     }
 }
 
@@ -52,15 +45,15 @@ function validateMap() {
 
     for (let y = 0; y < gameState.map.length; y++) {
         if (gameState.map[y].length !== mapWidth) {
-            throw new Error(`Row ${y} has inconsistent length: want ${mapWidth} got ${gameState.map[y].length }`);
+            throw new Error(`Row ${y} has inconsistent length: want ${mapWidth} got ${gameState.map[y].length}`);
         }
 
         for (let x = 0; x < mapWidth; x++) {
             const tile = gameState.map[y][x];
-            /*if (!Object.values(icons) .includes(tile)) {
+            /*if (!Object.values(resources.icons) .includes(tile)) {
                 throw new Error(`Invalid character "${tile}" at position (${x}, ${y})`);
             }*/
-            if (tile === icons['player']) {
+            if (tile === resources.icons['player']) {
                 playerCount++;
             }
         }
@@ -77,21 +70,21 @@ function validateMap() {
 function renderGame() {
     const gameContainer = document.getElementById("game-container");
     let visibleMap = "";
-    
+
     for (let y = 0; y < gameState.viewHeight; y++) {
         for (let x = 0; x < gameState.viewWidth; x++) {
             const mapX = gameState.player.x + x - Math.floor(gameState.viewWidth / 2);
             const mapY = gameState.player.y + y - Math.floor(gameState.viewHeight / 2);
-            
+
             if (mapX >= 0 && mapX < gameState.map[0].length && mapY >= 0 && mapY < gameState.map.length) {
                 visibleMap += gameState.map[mapY][mapX];
             } else {
-                visibleMap += icons['empty'];
+                visibleMap += resources.icons['empty'];
             }
         }
         visibleMap += "<br/>";
     }
-    
+
     gameContainer.innerHTML = visibleMap;
 }
 
@@ -99,29 +92,29 @@ function renderGame() {
 function movePlayer(dx, dy) {
     const newX = gameState.player.x + dx;
     const newY = gameState.player.y + dy;
-    
+
     if (newX >= 0 && newX < gameState.map[0].length && newY >= 0 && newY < gameState.map.length) {
         const targetTile = gameState.map[newY][newX];
-        if (targetTile !== icons['wall']) {
-            gameState.map[gameState.player.y] = gameState.map[gameState.player.y].substring(0, gameState.player.x) + icons['floor'] + 
-                                                gameState.map[gameState.player.y].substring(gameState.player.x + 1);
+        if (targetTile !== resources.icons['wall']) {
+            gameState.map[gameState.player.y] = gameState.map[gameState.player.y].substring(0, gameState.player.x) + resources.icons['floor'] +
+                gameState.map[gameState.player.y].substring(gameState.player.x + 1);
             gameState.player.x = newX;
             gameState.player.y = newY;
-            
+
             // Handle object interactions
-            switch(targetTile) {
-                case icons['coin']:
+            switch (targetTile) {
+                case resources.icons['coin']:
                     gameState.inventory.push("Coin");
                     break;
-                case icons['potion']:
+                case resources.icons['potion']:
                     gameState.inventory.push("Potion");
                     break;
-                case icons['chest']:
+                case resources.icons['chest']:
                     alert("You found a chest!");
                     break;
             }
-            
-            gameState.map[newY] = gameState.map[newY].substring(0, newX) + icons['player'] + gameState.map[newY].substring(newX + 1);
+
+            gameState.map[newY] = gameState.map[newY].substring(0, newX) + resources.icons['player'] + gameState.map[newY].substring(newX + 1);
             renderGame();
             renderInventory();
         }

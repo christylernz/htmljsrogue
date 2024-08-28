@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Roguelike Game</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Roguelike Game</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script type="module" src="./game.js"></script>
 </head>
+
 <body>
-    <div id="game-container"></div>
-    <div id="movement-buttons">
-      <div class="row">
-        <button class="movement-button" id="up">Up</button>
-      </div>
-      <div class="row" >
-        <button class="movement-button" id="left">Left</button>
-        <button class="movement-button" id="right">Right</button>
-      </div>
-      <div class="row">
-        <button class="movement-button" id="down">Down</button>
-      </div>
+  <div id="game-container"></div>
+  <div id="movement-buttons">
+    <div class="row">
+      <button class="movement-button" id="up">Up</button>
     </div>
-    <h2>Inventory</h2>
-    <div id="inventory"></div> 
-    <script src="game.js"></script>
+    <div class="row">
+      <button class="movement-button" id="left">Left</button>
+      <button class="movement-button" id="right">Right</button>
+    </div>
+    <div class="row">
+      <button class="movement-button" id="down">Down</button>
+    </div>
+  </div>
+  <h2>Inventory</h2>
+  <div id="inventory"></div>
 </body>
+
 </html>
