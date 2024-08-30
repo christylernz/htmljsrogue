@@ -8,6 +8,8 @@ export const icons = {
     floor: '.',
 };
 
-export function helloWorld() {
-    return "hello world";
+export class GameObject {
+  constructor(){
+    
+  }
 }

@@ -1,5 +1,5 @@
 //test/spec/resourcesspec.js
-import { helloWorld } from "../../resources.js";
+import { GameObject } from "../../resources.js";
 /* describe("Given the decision tree contains no animals or distinguishing questions.", function(){
   var someString;
   beforeEach(function() {
@@ -15,9 +15,9 @@ import { helloWorld } from "../../resources.js";
   });
 }); */
 
-describe("hello this is the World", () => {
-  it("returns hello world", () => {
-    var actual = helloWorld();
-    expect(actual).toBe("hello world");
+
+describe("GameObject",() =>{
+  it("is defined", () => {
+    expect(GameObject).toBeDefined();
   });
 })
