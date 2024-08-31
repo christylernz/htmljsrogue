@@ -14,12 +14,15 @@ describe("Given GameObject", () => {
       expect(gameObject.name).toBe("Test");
       gameObject.name = "Test Object";
       expect(gameObject.name).toBe("Test Object");
-      expect(function () { gameObject.name = ""; }).toThrowError("Name is empty");
+      expect(function() { gameObject.name = ""; }).toThrowError("Name is empty");
 
     });
     it("then it has a valid position", () => {
       expect(gameObject.position).toEqual([0, 0]);
+      gameObject.position = [1,1];
+      expect(gameObject.position).toEqual([1,1]);
+      expect(function() { gameObject.position = "test"}).toThrowError("Position must be an array");
     });
-
+    
   })
 })

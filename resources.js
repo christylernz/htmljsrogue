@@ -13,7 +13,7 @@ export class GameObject {
   #position
   constructor(name, position){
     this.#name = this.#validateName(name);
-    this.#position = position;
+    this.#position = this.#validatePosition(position);
   }
   
   set name(name){
@@ -28,6 +28,10 @@ export class GameObject {
     return this.#position;
   }
   
+  set position(position) {
+    this.#position = this.#validatePosition(position);
+  }
+  
   #validateName(name){
     //if (type of n) {}
     const trimmedName = name.trim();
@@ -35,5 +39,13 @@ export class GameObject {
       throw new Error("Name is empty");
     }
     return name;
+  }
+  
+  #validatePosition(position) {
+    if (Array.isArray(position)) {
+      return position;
+    } else {
+      throw new Error("Position must be an array");
+    }
   }
 }
