@@ -10,8 +10,10 @@ export const icons = {
 
 export class GameObject {
   #name
-  constructor(name){
+  #position
+  constructor(name, position){
     this.#name = this.#validateName(name);
+    this.#position = position;
   }
   
   set name(name){
@@ -19,7 +21,11 @@ export class GameObject {
   }
   
   get name() {
-    return this.#name
+    return this.#name;
+  }
+  
+  get position() {
+    return this.#position;
   }
   
   #validateName(name){

@@ -1,20 +1,5 @@
 //test/spec/resourcesspec.js
 import { GameObject } from "../../resources.js";
-/* describe("Given the decision tree contains no animals or distinguishing questions.", function(){
-  var someString;
-  beforeEach(function() {
-      someString = "foo";
-  });
-  describe("When the user starts a game.", function(){
-      beforeEach(function() {
-          someString += "bar";
-      });
-      it("Then the user should be required to create a new animal and distinguishing question.", function(){
-          expect(someString).toBe("foobar");
-      });
-  });
-}); */
-
 
 describe("Given GameObject", () => {
   it("is defined", () => {
@@ -33,7 +18,7 @@ describe("Given GameObject", () => {
 
     });
     it("then it has a valid position", () => {
-      expect(gameObject.position).toBe([0, 0]);
+      expect(gameObject.position).toEqual([0, 0]);
     });
 
   })
