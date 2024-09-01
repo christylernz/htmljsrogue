@@ -113,7 +113,7 @@ function movePlayer(dx, dy) {
                     break;
             }
 
-            gameState.map[newY] = gameState.map[newY].substring(0, newX) + resources.icons['player'] + gameState.map[newY].substring(newX + 1);
+            gameState.map[newY] = gameState.map[newY].substring(0, newX) + gameState.player.render()+ gameState.map[newY].substring(newX + 1);
             renderGame();
             renderInventory();
         }
