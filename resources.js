@@ -11,9 +11,11 @@ export const icons = {
 export class GameObject {
   #name
   #position
-  constructor(name, position){
+  #symbol
+  constructor(name, position, symbol){
     this.#name = this.#validateName(name);
     this.#position = this.#validatePosition(position);
+    this.#symbol = symbol;
   }
   
   set name(name){
@@ -32,6 +34,10 @@ export class GameObject {
     this.#position = this.#validatePosition(position);
   }
   
+  get symbol() {
+    return this.#symbol;
+  }
+  
   #validateName(name){
     //if (type of n) {}
     const trimmedName = name.trim();
@@ -48,4 +54,10 @@ export class GameObject {
       throw new Error("Position must be an array");
     }
   }
+  
+  render() {
+    return this.#symbol;
+  }
+  
+  
 }
