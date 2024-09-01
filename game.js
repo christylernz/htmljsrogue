@@ -2,7 +2,7 @@ import * as resources from "./resources.js";
 // Game state
 const gameState = {
     map: [],
-    player: { x: 0, y: 0 },
+    player: null,
     viewWidth: 10,
     viewHeight: 10,
     inventory: []
@@ -21,7 +21,7 @@ async function loadMap(filename) {
         for (let y = 0; y < gameState.map.length; y++) {
             const x = gameState.map[y].indexOf(resources.icons['player']);
             if (x !== -1) {
-                gameState.player = { x, y };
+                gameState.player = new resources.GameObject("player", [x, y], resources.icons['player']);
                 break;
             }
         }
@@ -73,8 +73,8 @@ function renderGame() {
 
     for (let y = 0; y < gameState.viewHeight; y++) {
         for (let x = 0; x < gameState.viewWidth; x++) {
-            const mapX = gameState.player.x + x - Math.floor(gameState.viewWidth / 2);
-            const mapY = gameState.player.y + y - Math.floor(gameState.viewHeight / 2);
+            const mapX = gameState.player.position[0] + x - Math.floor(gameState.viewWidth / 2);
+            const mapY = gameState.player.position[1] + y - Math.floor(gameState.viewHeight / 2);
 
             if (mapX >= 0 && mapX < gameState.map[0].length && mapY >= 0 && mapY < gameState.map.length) {
                 visibleMap += gameState.map[mapY][mapX];
@@ -90,16 +90,15 @@ function renderGame() {
 
 // Handle player movement
 function movePlayer(dx, dy) {
-    const newX = gameState.player.x + dx;
-    const newY = gameState.player.y + dy;
+    const newX = gameState.player.position[0] + dx;
+    const newY = gameState.player.position[1] + dy;
 
     if (newX >= 0 && newX < gameState.map[0].length && newY >= 0 && newY < gameState.map.length) {
         const targetTile = gameState.map[newY][newX];
         if (targetTile !== resources.icons['wall']) {
-            gameState.map[gameState.player.y] = gameState.map[gameState.player.y].substring(0, gameState.player.x) + resources.icons['floor'] +
-                gameState.map[gameState.player.y].substring(gameState.player.x + 1);
-            gameState.player.x = newX;
-            gameState.player.y = newY;
+            gameState.map[gameState.player.position[1]] = gameState.map[gameState.player.position[1]].substring(0, gameState.player.position[0]) + resources.icons['floor'] +
+                gameState.map[gameState.player.position[1]].substring(gameState.player.position[0] + 1);
+            gameState.player.position = [newX, newY];
 
             // Handle object interactions
             switch (targetTile) {
