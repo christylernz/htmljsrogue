@@ -6,3 +6,14 @@ export const GameObject = (position) => {
     render
   }
 }
+
+export const SimpleObject = (position) => {
+  var position = position;
+  const render = () => {
+    return "@";
+  }
+  return {
+    position, 
+    render
+  }
+}

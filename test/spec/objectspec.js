@@ -89,4 +89,21 @@ describe("Object Experiment", () => {
       });
     });
   });
+  describe("Simple Object module", () => {
+    it("is defined", () => {
+      expect(testmodule.SimpleObject).toBeDefined();
+    });
+    describe("when created", () => {
+      let simpleObject;
+      beforeEach(function() {
+        simpleObject = testmodule.SimpleObject([0, 0]);
+      });
+      it("then it has a position", () => {
+        expect(simpleObject.position).toEqual([0, 0]);
+      });
+      it("then it renders nothing", () => {
+        expect(simpleObject.render()).toBe("@");
+      });
+    });
+  });
 });
