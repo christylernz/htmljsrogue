@@ -1,3 +1,36 @@
+/* iife with constructor
+*/
+
+var OrderNotifier = (function()
+  {
+    //  private stuff would go here
+    //  shared by all instances
+
+
+    return function( /* constructor args go here */ ) {
+
+      // per-instance private vars here
+
+      return {
+        notifyApproved: function(orderId, notifier, recipient)
+        {
+          // use the notifier object passed as ctor param to send notifications 
+          // related to orderId to recipients 
+        },
+
+        notifySomeOtherEvent: function(orderId, notifier, recipient)
+        {
+          // use the ctor params again
+        }
+      };
+    }
+
+  }
+}();
+
+// sometime later in your code
+var notifier = new OrderNotifier( /* args here */ );
+
 //module approach
 //Example 1
 export const MyModule = () => {

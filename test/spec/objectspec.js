@@ -3,107 +3,73 @@ import * as testfunction from '../../testfunction.js';
 import * as testmodule from '../../testmodule.js';
 
 
+
 describe("Object Experiment", () => {
-  describe("Game Object class", () => {
-    it("is defined", () => {
-      expect(testclass.GameObject).toBeDefined();
+  
+  function runGameObjectTest(name, gameObject) {
+    it("then it has a valid position", () => {
+      expect(gameObject.position).toEqual([0, 0]);
+      gameObject.position = [1, 1];
+      expect(gameObject.position).toEqual([1, 1]);
+      expect(() => gameObject.position = "test").toThrowError("Position must be an array");
+      console.log(name);
+      console.log(gameObject);
     });
+    it("then it renders nothing", () => {
+      expect(gameObject.render()).nothing();
+    });
+  }
+  
+  function runSimpleObjectTest(name, simpleObject) {
+    it("then it has a valid position", () => {
+      expect(simpleObject.position).toEqual([0, 0]);
+      simpleObject.position = [1, 1];
+      expect(simpleObject.position).toEqual([1, 1]);
+      expect(() => simpleObject.position = "test").toThrowError("Position must be an array");
+      console.log(name);
+      console.log(simpleObject);
+    });
+    it("then it renders @", () => {
+      expect(simpleObject.render()).toBe("@");
+    });
+  }
+  let name = "class";
+  describe("Game Object class", () => {
     describe("when created", () => {
-      let gameObject;
-      beforeEach(function () {
-        gameObject = new testclass.GameObject([0, 0]);
-      });
-      it("then it has a position", () => {
-        expect(gameObject.position).toEqual([0,0]);
-      });
-      it("then it renders nothing", () => {
-        expect(gameObject.render()).nothing();
-      });
+      let gameObject = new testclass.GameObject([0, 0]);
+      runGameObjectTest(name, gameObject);
     });
   });
   describe("Simple Object subclass", () => {
-     it("is defined", () => {
-       expect(testclass.SimpleObject).toBeDefined();
-     });
-     describe("when created", () => {
-       let simpleObject;
-       beforeEach(function() {
-         simpleObject = new testclass.SimpleObject([0, 0]);
-       });
-       it("then it has a position", () => {
-         expect(simpleObject.position).toEqual([0, 0]);
-       });
-       it("then it renders nothing", () => {
-         expect(simpleObject.render()).toBe("@");
-       });
-     });
-  });
-  describe("Game Object function", () => {
-    it("is defined", () => {
-      expect(testfunction.GameObject).toBeDefined();
-    });
     describe("when created", () => {
-      let gameObject;
-      beforeEach(function() {
-        gameObject = new testfunction.GameObject([0, 0]);
-      });
-      it("then it has a position", () => {
-        expect(gameObject.position).toEqual([0, 0]);
-      });
-      it("then it renders nothing", () => {
-        expect(gameObject.render()).nothing();
-      });
+      let simpleObject = new testclass.SimpleObject([0, 0]);
+      runSimpleObjectTest(name, simpleObject);
+    });
+  });
+  name = "function";
+  describe("Game Object function", () => {
+    describe("when created", () => {
+      let gameObject = new testfunction.GameObject([0, 0]);
+      runGameObjectTest(name, gameObject);
     });
   });
   describe("Simple Object function", () => {
-    it("is defined", () => {
-      expect(testfunction.SimpleObject).toBeDefined();
-    });
     describe("when created", () => {
-      let simpleObject;
-      beforeEach(function() {
-        simpleObject = new testfunction.SimpleObject([0, 0]);
-      });
-      it("then it has a position", () => {
-        expect(simpleObject.position).toEqual([0, 0]);
-      });
-      it("then it renders nothing", () => {
-        expect(simpleObject.render()).toBe("@");
-      });
+      let simpleObject = new testfunction.SimpleObject([0, 0]);
+      runSimpleObjectTest(name, simpleObject);
     });
   });
+  name = "module";
   describe("Game Object module", () => {
-    it("is defined", () => {
-      expect(testmodule.GameObject).toBeDefined();
-    });
     describe("when created", () => {
-      let gameObject;
-      beforeEach(function() {
-        gameObject = testmodule.GameObject([0, 0]);
-      });
-      it("then it has a position", () => {
-        expect(gameObject.position).toEqual([0, 0]);
-      });
-      it("then it renders nothing", () => {
-        expect(gameObject.render()).nothing();
-      });
+      let gameObject = new testmodule.GameObject([0, 0]);
+      runGameObjectTest(name, gameObject);
     });
   });
   describe("Simple Object module", () => {
-    it("is defined", () => {
-      expect(testmodule.SimpleObject).toBeDefined();
-    });
     describe("when created", () => {
-      let simpleObject;
-      beforeEach(function() {
-        simpleObject = testmodule.SimpleObject([0, 0]);
-      });
-      it("then it has a position", () => {
-        expect(simpleObject.position).toEqual([0, 0]);
-      });
-      it("then it renders nothing", () => {
-        expect(simpleObject.render()).toBe("@");
-      });
+      let simpleObject = new testmodule.SimpleObject([0, 0]);
+      runSimpleObjectTest(name, simpleObject);
     });
   });
 });
