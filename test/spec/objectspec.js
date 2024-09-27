@@ -1,6 +1,6 @@
 import * as testclass from '../../testclass.js';
 import * as testfunction from '../../testfunction.js';
-import * as testmodule from '../../testmodule.js';
+import * as testiife from '../../testiife.js';
 
 
 
@@ -59,16 +59,16 @@ describe("Object Experiment", () => {
       runSimpleObjectTest(name, simpleObject);
     });
   });
-  name = "module";
-  describe("Game Object module", () => {
+  name = "iife";
+  describe("Game Object iife", () => {
     describe("when created", () => {
-      let gameObject = new testmodule.GameObject([0, 0]);
+      let gameObject = new testiife.GameObject([0, 0]);
       runGameObjectTest(name, gameObject);
     });
   });
-  describe("Simple Object module", () => {
+  describe("Simple Object iife", () => {
     describe("when created", () => {
-      let simpleObject = new testmodule.SimpleObject([0, 0]);
+      let simpleObject = new testiife.SimpleObject([0, 0]);
       runSimpleObjectTest(name, simpleObject);
     });
   });

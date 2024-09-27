@@ -33,7 +33,12 @@ export var SimpleObject = (function() {
       return "@";
     }
     return {
-     ...gameObject, 
+       get position() {
+         return gameObject.position;
+       },
+       set position(newPosition) {
+         gameObject.position = newPosition;
+       },
       render
     }
   }
