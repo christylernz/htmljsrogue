@@ -1,17 +1,19 @@
 export var GameObject = (function() {
   //  private stuff would go here
   //  shared by all instances
+  const validatePosition = (position) => {
+    if (Array.isArray(position)) {
+      return position;
+    } else {
+      throw new Error("Position must be an array");
+    }
+  }
+  const render = () => {};
+  
   return function(position) {
     // per-instance private vars here
-    const render = () => {};
-    console.log(position);
-    const validatePosition = (position) => {
-      if (Array.isArray(position)) {
-        return position;
-      } else {
-        throw new Error("Position must be an array");
-      }
-    }
+    
+    
     var position = validatePosition(position);
   
     return {
@@ -27,11 +29,12 @@ export var GameObject = (function() {
 })();
 
 export var SimpleObject = (function() {
+  const render = () => {
+    return "@";
+  }
   return function(position) {
     var gameObject = new GameObject(position);
-    const render = () => {
-      return "@";
-    }
+    
     return {
        get position() {
          return gameObject.position;
