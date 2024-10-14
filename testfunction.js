@@ -1,24 +1,42 @@
-export function GameObject(position) {
-  
-  const render = function() {};
+
+function createPosition(position) {
+
   const validatePosition = (position) => {
-      if (Array.isArray(position)) {
-        return position;
-      } else {
-        throw new Error("Position must be an array");
-      }
+    if (Array.isArray(position)) {
+      return position;
+    } else {
+      throw new Error("Position must be an array");
     }
-  var position = validatePosition(position);
-  
-  
+  }
+  var myPosition = validatePosition(position);
+
+
   return {
-    get position() {
-        return position;
-      },
-      set position(newPosition) {
-        position = validatePosition(newPosition)
-      },
-    render
+    get position() { myPosition },
+    set position(newPosition) { myPosition = newPosition },
+  };
+}
+
+function createRenderable(symbol) {
+  return {
+    render: () => {
+      return symbol;
+    }
+  }
+}
+
+export function GameObject(position) {
+
+  this
+
+  Object.defineProperty(obj, 'myPosition', {
+    enumerable: false,
+    writable: true,
+    configurable: true
+  });
+  return {
+    ...createPosition(position),
+    ...createRenderable("")
   }
 }
 
