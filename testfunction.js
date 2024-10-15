@@ -2,18 +2,20 @@
 function createPosition(position) {
 
   const validatePosition = (position) => {
+    console.log("validate:" + position )
     if (Array.isArray(position)) {
       return position;
     } else {
       throw new Error("Position must be an array");
     }
   }
-  var myPosition = validatePosition(position);
+  let myPosition = validatePosition(position);
 
 
   return {
-    get position() { myPosition },
-    set position(newPosition) { myPosition = newPosition },
+    get position() { return myPosition },
+    set position(newPosition) { 
+      myPosition = validatePosition(newPosition) },
   };
 }
 
@@ -26,18 +28,19 @@ function createRenderable(symbol) {
 }
 
 export function GameObject(position) {
+  const gameObject = {
+    ...createPosition(position),
+    ...createRenderable(""),
+  };
 
-  this
-
-  Object.defineProperty(obj, 'myPosition', {
-    enumerable: false,
-    writable: true,
+  Object.defineProperty(gameObject, 'position', {
+    get: gameObject.getPosition,
+    set: positionMethods.setPosition,
+    enumerable: true,
     configurable: true
   });
-  return {
-    ...createPosition(position),
-    ...createRenderable("")
-  }
+
+  return gameObject;
 }
 
 export function SimpleObject(position) {
