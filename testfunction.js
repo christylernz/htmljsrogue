@@ -1,8 +1,9 @@
 
+
 function createPosition(position) {
 
   const validatePosition = (position) => {
-    console.log("validate:" + position )
+    console.log("validate:" + position)
     if (Array.isArray(position)) {
       return position;
     } else {
@@ -10,13 +11,10 @@ function createPosition(position) {
     }
   }
   let myPosition = validatePosition(position);
-
-
   return {
     get position() { return myPosition },
-    set position(newPosition) { 
-      myPosition = validatePosition(newPosition) },
-  };
+    set position(newPosition) { myPosition = validatePosition(newPosition) },
+  }
 }
 
 function createRenderable(symbol) {
@@ -28,33 +26,23 @@ function createRenderable(symbol) {
 }
 
 export function GameObject(position) {
-  const gameObject = {
-    ...createPosition(position),
-    ...createRenderable(""),
-  };
+  const gameObject = {};
 
-  Object.defineProperty(gameObject, 'position', {
-    get: gameObject.getPosition,
-    set: positionMethods.setPosition,
-    enumerable: true,
-    configurable: true
+  Object.defineProperties(gameObject, {
+    ...Object.getOwnPropertyDescriptors(createPosition(position)),
+    ...Object.getOwnPropertyDescriptors(createRenderable(""))
   });
 
   return gameObject;
 }
 
-export function SimpleObject(position) {
-  var gameObject = new GameObject(position);
-  const render = () => {
-    return "@";
-  }
-  return {
-    get position() {
-      return gameObject.position;
-    },
-    set position(newPosition) {
-      gameObject.position = newPosition;
-    },
-    render
-  }
+export function SimpleObject(position, symbol = "@") {
+  const simpleObject = {};
+
+  Object.defineProperties(simpleObject, {
+    ...Object.getOwnPropertyDescriptors(createPosition(position)),
+    ...Object.getOwnPropertyDescriptors(createRenderable(symbol))
+  });
+
+  return simpleObject;
 }
