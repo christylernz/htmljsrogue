@@ -1,5 +1,5 @@
-export class GameObject {
-  #position 
+class Position {
+  #position;
   constructor(position) {
     this.#position = this.#validatePosition(position);
   }
@@ -16,16 +16,49 @@ export class GameObject {
       throw new Error("Position must be an array");
     }
   }
-  render() {}
 }
 
-export class SimpleObject extends GameObject {
+class Renderable {
   #symbol
-  constructor(position, symbol = "@" ) {
-    super(position);
+  constructor(symbol) {
     this.#symbol = symbol;
   }
   render() {
     return this.#symbol;
+  }
+}
+
+
+export class GameObject {
+  #position
+  #render
+  constructor(position) {
+    this.#position = new Position(position);
+    this.#render = new Renderable("")
+  }
+  get position() {
+    return this.#position.position;
+  }
+  set position(newPosition) {
+    this.#position.position = newPosition;
+  }
+  render() { this.#render.render() }
+}
+
+export class SimpleObject {
+  #position
+  #render
+  constructor(position, symbol = "@") {
+    this.#position = new Position(position);
+    this.#render = new Renderable(symbol)
+  }
+  get position() {
+    return this.#position.position;
+  }
+  set position(newPosition) {
+    this.#position.position = newPosition;
+  }
+  render() {
+    return this.#render.render();
   }
 }

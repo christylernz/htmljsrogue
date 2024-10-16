@@ -3,7 +3,6 @@
 function createPosition(position) {
 
   const validatePosition = (position) => {
-    console.log("validate:" + position)
     if (Array.isArray(position)) {
       return position;
     } else {
