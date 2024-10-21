@@ -60,4 +60,38 @@ export class GameObject {
   }
   
   
+  
+}
+
+export function RenderProperty(symbol){
+  let mySymbol = symbol;
+  return {
+    render: () => { return mySymbol;}
+  }
+}
+
+export function PositionProperty(position) {
+  const validatePosition = (position) => {
+  if (Array.isArray(position)) {
+      return position;
+    } else {
+      throw new Error("Position must be an array");
+    }
+  }
+  let myPosition = validatePosition(position);
+  return {
+    get position() { return myPosition }, 
+    set position(newPosition) { myPosition = validatePosition(newPosition) }, 
+  }
+}
+
+export function PlayerEntity(positionProperty, renderProperty ) {
+  const player = {};
+  
+  Object.defineProperties(player, {
+    ...Object.getOwnPropertyDescriptors(positionProperty),
+    ...Object.getOwnPropertyDescriptors(renderProperty)
+  });
+  
+  return player;
 }
