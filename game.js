@@ -21,7 +21,7 @@ async function loadMap(filename) {
         for (let y = 0; y < gameState.map.length; y++) {
             const x = gameState.map[y].indexOf(resources.icons['player']);
             if (x !== -1) {
-                gameState.player = new resources.GameObject("player", [x, y], resources.icons['player']);
+                gameState.player = new resources.PlayerEntity(new resources.PositionProperty([x, y]),new resources.RenderProperty(resources.icons['player']));
                 break;
             }
         }
