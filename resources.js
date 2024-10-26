@@ -63,6 +63,28 @@ export class GameObject {
   
 }
 
+export function NameProperty(name) {
+  let myName;
+  
+  const validateName =  (name) =>  {
+    if (typeof name !== 'string') {
+      throw new Error("Name must be a string");
+    }
+    
+    const trimmedName = name.trim();
+    if (trimmedName.length === 0) {
+      throw new Error("Name is empty");
+    }
+    return name;
+    
+  }
+  myName = validateName(name);
+  return {
+    get name() { return myName; }, 
+    set name(name) { myName = validateName(name); }
+  }
+}
+
 export function RenderProperty(symbol){
   let mySymbol = symbol;
   return {

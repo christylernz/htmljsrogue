@@ -1,5 +1,5 @@
 //test/spec/resourcesspec.js
-import { PlayerEntity, GameObject, RenderProperty, PositionProperty} from "../../resources.js";
+import { PlayerEntity, NameProperty, GameObject, RenderProperty, PositionProperty} from "../../resources.js";
 
 describe("Given GameObject", () => {
   it("is defined", () => {
@@ -70,6 +70,31 @@ describe("Given RenderProperty", () => {
     });
   });
 });
+
+describe("Given NameProperty", () => {
+  it("is defined", () => {
+    expect(NameProperty).toBeDefined();
+  });
+  describe("when it is created", () => {
+    let myName;
+    it("then it accepts only a non empty string", () => {
+      expect(function() { myName = new NameProperty(2); }).toThrowError("Name must be a string");
+      expect(function() {  myName = new NameProperty(""); }).toThrowError("Name is empty");
+    });
+    beforeEach(function () {
+      myName = new NameProperty("Test");
+    });
+    it("then it has a valid name", () => {
+      expect(myName.name).toBe("Test");
+      myName.name = "changed name";
+      expect(myName.name).toBe("changed name");
+      expect(function() { myName.name = 2; }).toThrowError("Name must be a string");
+      expect(function() { myName.name = ""; }).toThrowError("Name is empty");
+    });
+  });
+});
+  
+
 
 describe("Given PlayerEntity", () => {
    it("is defined", () => {
