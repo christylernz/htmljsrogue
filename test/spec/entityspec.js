@@ -30,7 +30,8 @@ describe("Given Player", () => {
 
       player.set([1, 1]);
       expect(position.set).toHaveBeenCalledWith([1, 1]);  // Confirm set is delegated
-  });
+    });
+  
        /*  it("then it must have a valid position", () => {
          expect(player.position).toEqual([0, 0]);
          player.position = [1, 1];
@@ -40,5 +41,23 @@ describe("Given Player", () => {
        it("then it must render the string", () => {
          expect(player.render()).toBe('@');
        });  */
-   });
+  });
+  describe("when it is created without display or position", () => {
+    let position, display, player;
+    position = jasmine.createSpyObj("position", ["get", "set"]); 
+    display = jasmine.createSpyObj("display", ["render"]);
+      
+    position.get.and.returnValue([0, 0]);
+    display.render.and.returnValue("@");
+
+    // player = new Player(position, display);
+    it("then it should throw error ", () => {
+      expect(() => {
+        player = new Player(undefined, display);
+      }).toThrowError(TypeError, "Cannot convert undefined or null to object");
+      expect(() => {
+        player = new Player(position, undefined);
+      }).toThrowError(TypeError, "Cannot convert undefined or null to object");
+    });
+  });
 });
