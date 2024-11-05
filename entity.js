@@ -6,7 +6,7 @@ export function Player(position, display) {
     throw new Error("Position must implement getter and setter");
   }
   if (typeof display.render !== 'function') {
-    throw new Error("Display must have render method");
+    throw new Error("Display must implement render method");
   }
   const player = {};
 

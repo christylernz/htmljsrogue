@@ -34,9 +34,10 @@ describe("Given Player", () => {
       player.position = [1, 1];
       expect(Object.getOwnPropertyDescriptor(validPosition, 'position').set).toHaveBeenCalledWith([1, 1]);
     });
-  });
-  it("then it should get only accept a valid position and dispaly", () => {
+     it("then it should only accept a valid position and dispaly", () => {
+
     const invalidPosition = {
+
       set position(newPos) { }
     }; // No setter
     expect(() => {
@@ -48,4 +49,6 @@ describe("Given Player", () => {
       player = new Player(validPosition, invalidDisplay);
     }).toThrow(new Error("Display must implement render method"));
   });
+  });
+ 
 });
