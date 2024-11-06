@@ -1,4 +1,6 @@
-import * as resources from "./resources.js";
+import * as resources from './resources.js';
+import * as entities from './entity.js';
+import * as properties from './property.js';
 // Game state
 const gameState = {
     map: [],
@@ -21,7 +23,7 @@ async function loadMap(filename) {
         for (let y = 0; y < gameState.map.length; y++) {
             const x = gameState.map[y].indexOf(resources.icons['player']);
             if (x !== -1) {
-                gameState.player = new resources.PlayerEntity(new resources.PositionProperty([x, y]),new resources.RenderProperty(resources.icons['player']));
+                gameState.player = new entities.Player(new properties.Position([x, y]),new properties.DisplayChar(resources.icons['player']));
                 break;
             }
         }
