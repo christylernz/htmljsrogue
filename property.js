@@ -41,3 +41,7 @@ export function Position(position) {
     set position(newPosition) { myPosition = validatePosition(newPosition) },
   }
 }
+
+export function MovePosition() {
+  
+}

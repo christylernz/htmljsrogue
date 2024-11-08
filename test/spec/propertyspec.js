@@ -1,4 +1,4 @@
-import { Name, DisplayChar, Position } from "../../property.js";
+import { Name, DisplayChar, Position, MovePosition } from "../../property.js";
 
 describe("Given Position", () => {
   it("is defined", () => {
@@ -59,6 +59,21 @@ describe("Given Name", () => {
       expect(myName.name).toBe("changed name");
       expect(function () { myName.name = 2; }).toThrowError("Name must be a string");
       expect(function () { myName.name = ""; }).toThrowError("Name is empty");
+    });
+  });
+});
+
+describe("Given MovePosition", () => {
+  it("is defined", () => {
+    expect(MovePosition).toBeDefined();
+  });
+  describe("when it is created", () => {
+    let mover;
+    beforeEach(function() {
+      mover = new MovePosition();
+    });
+    it("then it must move the position", () => {
+      
     });
   });
 });
