@@ -1,4 +1,4 @@
-export function Player(position, display) {
+export function Player(position, display, movePosition) {
 
   // Verify required methods exist
   const descriptor = Object.getOwnPropertyDescriptor(position, 'position');
@@ -8,12 +8,20 @@ export function Player(position, display) {
   if (typeof display.render !== 'function') {
     throw new Error("Display must implement render method");
   }
+  
+  if (typeof movePosition.move !== 'function') {
+    throw new Error("MovePosition must implement move method");
+  }
   const player = {};
 
   Object.defineProperties(player, {
     ...Object.getOwnPropertyDescriptors(position),
-    ...Object.getOwnPropertyDescriptors(display)
+    ...Object.getOwnPropertyDescriptors(display), 
   });
+
+  player.move = function(direction) {
+    this.position = movePosition.move(direction, this.position);
+  }
 
   return player;
 }
