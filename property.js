@@ -43,5 +43,32 @@ export function Position(position) {
 }
 
 export function MovePosition() {
-  
+  return {
+    move: (direction, startPosition) => {
+      switch (direction) {
+        case Direction.UP:
+          return [startPosition[0], startPosition[1] - 1];
+          break;
+        case Direction.DOWN:
+          return [startPosition[0], startPosition[1] + 1];
+          break;
+        case Direction.LEFT:
+          return [startPosition[0] - 1, startPosition[1]];
+          break;
+        case Direction.RIGHT:
+          return [startPosition[0] + 1, startPosition[1]];
+          break;
+        
+        default:
+          throw new Error("Invalid direction");
+      }
+    }
+  }
+}
+
+export const Direction = {
+  UP: 'UP', 
+  DOWN: 'DOWN', 
+  LEFT: 'LEFT',
+  RIGHT: 'RIGHT'
 }

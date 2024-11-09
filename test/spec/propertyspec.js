@@ -1,4 +1,4 @@
-import { Name, DisplayChar, Position, MovePosition } from "../../property.js";
+import { Name, DisplayChar, Position, MovePosition, Direction} from "../../property.js";
 
 describe("Given Position", () => {
   it("is defined", () => {
@@ -34,7 +34,7 @@ describe("Given DisplayChar", () => {
     beforeEach(function () {
       display = new DisplayChar("@");
     });
-    it("then it must render the string", () => {
+    it("then it renders the string", () => {
       expect(display.render()).toBe('@');
     });
   });
@@ -72,8 +72,29 @@ describe("Given MovePosition", () => {
     beforeEach(function() {
       mover = new MovePosition();
     });
+    it("then it provides a move method", () => {
+      expect(mover.move).toBeDefined();
+      expect(typeof mover.move).toBe('function');
+    });
+    let startPosition = [0, 0];
     it("then it must move the position", () => {
+      expect(mover.move(Direction.UP, startPosition)).toEqual([0, -1]);
+      expect(mover.move(Direction.DOWN, startPosition)).toEqual([0, 1]);
+      expect(mover.move(Direction.LEFT, startPosition)).toEqual([-1, 0]);
+      expect(mover.move(Direction.RIGHT, startPosition)).toEqual([1, 0]);
       
+      startPosition = [10,10];
+      expect(mover.move(Direction.UP, startPosition)).toEqual([10, 9]);
+      expect(mover.move(Direction.DOWN, startPosition)).toEqual([10, 11]);
+      expect(mover.move(Direction.LEFT, startPosition)).toEqual([9, 10]);
+      expect(mover.move(Direction.RIGHT, startPosition)).toEqual([11, 10]);
+    });
+    
+    
+    it("then it throws error for invalid direction", () => {
+      expect(() => {
+        mover.move("INVALID", startPosition);
+      }).toThrow(new Error("Invalid direction"));
     });
   });
 });
