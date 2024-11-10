@@ -23,7 +23,11 @@ async function loadMap(filename) {
         for (let y = 0; y < gameState.map.length; y++) {
             const x = gameState.map[y].indexOf(resources.icons['player']);
             if (x !== -1) {
-                gameState.player = new entities.Player(new properties.Position([x, y]),new properties.DisplayChar(resources.icons['player']));
+                gameState.player = new entities.Player(
+                  new properties.Position([x, y]),
+                  new properties.DisplayChar(resources.icons['player']), 
+                  new properties.MovePosition()
+                );
                 break;
             }
         }
@@ -130,18 +134,18 @@ function renderInventory() {
 // Set up event listeners for player movement
 document.addEventListener("keydown", (e) => {
     switch (e.key) {
-        case "ArrowUp": movePlayer(0, -1); break;
-        case "ArrowDown": movePlayer(0, 1); break;
-        case "ArrowLeft": movePlayer(-1, 0); break;
-        case "ArrowRight": movePlayer(1, 0); break;
+        case "ArrowUp": movePlayer(properties.Direction.UP); break;
+        case "ArrowDown": movePlayer(properties.Direction.DOWN); break;
+        case "ArrowLeft": movePlayer(properties.Direction.LEFT); break;
+        case "ArrowRight": movePlayer(properties.Direction.RIGHT); break;
     }
 });
 
 // Set up event listeners for movement buttons
-document.getElementById("up").addEventListener("click", () => movePlayer(0, -1));
-document.getElementById("down").addEventListener("click", () => movePlayer(0, 1));
-document.getElementById("left").addEventListener("click", () => movePlayer(-1, 0));
-document.getElementById("right").addEventListener("click", () => movePlayer(1, 0));
+document.getElementById("up").addEventListener("click", () => movePlayer(properties.Direction.UP));
+document.getElementById("down").addEventListener("click", () => movePlayer(properties.Direction.DOWN));
+document.getElementById("left").addEventListener("click", () => movePlayer(properties.Direction.LEFT));
+document.getElementById("right").addEventListener("click", () => movePlayer(properties.Direction.RIGHT));
 
 // Initialize the game
 loadMap('map.txt');
