@@ -71,7 +71,7 @@ export function validateMap() {
 }
 
 // Handle player movement
-export function movePlayer(direction) {
+export function movePlayer(player, direction) {
     const newX = gameState.player.position[0] + dx;
     const newY = gameState.player.position[1] + dy;
 

@@ -37,3 +37,8 @@ export function renderGame() {
 
     gameContainer.innerHTML = visibleMap;
 }
+
+export function renderInventory() {
+    const inventoryContainer = document.getElementById("inventory");
+    inventoryContainer.innerHTML = gameState.inventory.map(item => `<div class="item">${item}</div>`).join("");
+}
