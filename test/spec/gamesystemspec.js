@@ -7,18 +7,25 @@ describe("Given a game system", () => {
     });
 });
 
-describe("Given a player and move direction", () => {
-    let player, direction;
+describe("Given a player and direction to move", () => {
+  let player, direction, validPosition, validMover;
+  
+  beforeEach(function () {
     direction = 'UP';
-
-    validMover = jasmine.createSpyObj("movePosition", ["move"]);
+    validMover = jasmine.createSpyObj("movePlayer", ["move"]);
     validMover.move.and.returnValue([0, -1]);
     player = {
-        validMover
+      position: [0,0], 
+      ...validMover
     };
-
-    it("then player is position is updated", () => {
-        game.movePlayer(player, direction);
-        expect(validMover).toHaveBeenCalled();
-    });
+  });
+  it("then player position is updated", () => {
+    game.movePlayer(player, direction);
+    expect(player.move).toHaveBeenCalledWith(direction);
+  });
+  it("then the move must be within bounds", () => {
+    player.position = [0,0];
+    expect(game.movePlayer(player, direction)).toBe(false);
+  });
 });
+

@@ -72,8 +72,11 @@ export function validateMap() {
 
 // Handle player movement
 export function movePlayer(player, direction) {
-    const newX = gameState.player.position[0] + dx;
-    const newY = gameState.player.position[1] + dy;
+   player.move(direction);
+   let validMove = isMoveValid(player, direction);
+   return validMove;
+    /*const newX = player.position[0] + dx;
+    const newY = player.position[1] + dy;
 
     if (newX >= 0 && newX < gameState.map[0].length && newY >= 0 && newY < gameState.map.length) {
         const targetTile = gameState.map[newY][newX];
@@ -99,5 +102,17 @@ export function movePlayer(player, direction) {
             renderGame();
             renderInventory();
         }
-    }
+    }*/
+}
+
+
+function isMoveValid(player, direction) {
+  let targetPosition = player.position;
+  if (direction == 'UP') {
+    targetPosition[1]--;
+  }
+  if (targetPosition[1] < 0) {
+    return false;
+  }
+  return true;
 }
