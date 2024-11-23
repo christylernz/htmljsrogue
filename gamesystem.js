@@ -72,8 +72,12 @@ export function validateMap() {
 
 // Handle player movement
 export function movePlayer(player, direction, bounds) {
-   player.move(direction);
-   let validMove = isMoveValid(player, direction, bounds);
+   let targetPosition = getTarget(player.position, direction);
+   let validMove = isInBounds(targetPosition, bounds);
+   if (validMove) {
+     player.move(direction);
+   }
+   
    return validMove;
     /*const newX = player.position[0] + dx;
     const newY = player.position[1] + dy;
@@ -112,8 +116,8 @@ const DIRECTIONS = {
   RIGHT: [1,0]
 };
 
-function isMoveValid(player, direction, bounds) {
-  let targetPosition = getTarget(player.position, direction);
+function isInBounds(targetPosition, bounds) {
+  
   let x, y, width, height;
   x = bounds[0];
   y = bounds[1];

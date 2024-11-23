@@ -11,7 +11,7 @@ describe("Given a player and direction to move", () => {
   let player, direction, validPosition, validMover;
   
   beforeEach(function () {
-    direction = 'UP';
+    direction = 'DOWN';
     validMover = jasmine.createSpyObj("movePlayer", ["move"]);
     validMover.move.and.returnValue([0, -1]);
     player = {
