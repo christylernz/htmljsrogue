@@ -71,9 +71,9 @@ export function validateMap() {
 }
 
 // Handle player movement
-export function movePlayer(player, direction) {
+export function movePlayer(player, direction, bounds) {
    player.move(direction);
-   let validMove = isMoveValid(player, direction);
+   let validMove = isMoveValid(player, direction, bounds);
    return validMove;
     /*const newX = player.position[0] + dx;
     const newY = player.position[1] + dy;
@@ -105,14 +105,33 @@ export function movePlayer(player, direction) {
     }*/
 }
 
+const DIRECTIONS = {
+  UP: [0,-1],
+  DOWN: [0,1], 
+  LEFT: [-1,0], 
+  RIGHT: [1,0]
+};
 
-function isMoveValid(player, direction) {
-  let targetPosition = player.position;
-  if (direction == 'UP') {
-    targetPosition[1]--;
-  }
-  if (targetPosition[1] < 0) {
+function isMoveValid(player, direction, bounds) {
+  let targetPosition = getTarget(player.position, direction);
+  let x, y, width, height;
+  x = bounds[0];
+  y = bounds[1];
+  width = bounds[2];
+  height = bounds[3];
+  
+  if (
+    targetPosition[0] < x 
+    || targetPosition[1] < y
+    || targetPosition[0] >= width
+    || targetPosition[1] >= height
+  ) {
     return false;
   }
   return true;
+}
+
+function getTarget(position, direction) {
+  const directionVector = DIRECTIONS[direction];
+  return position.map((coord, index) => coord + directionVector[index]);
 }
