@@ -71,17 +71,20 @@ export function validateMap() {
 }
 
 // Handle player movement
-export function movePlayer(player, direction, bounds) {
+export function movePlayer(player, direction, bounds, map) {
    let targetPosition = getTarget(player.position, direction);
-   let validMove = isInBounds(targetPosition, bounds);
-   if (validMove) {
-     player.move(direction);
-   }
+   let validMove = false;
    
+   if (isInBounds(targetPosition, bounds)) {
+     const targetTile = map[targetPosition[0],targetPosition[1]]
+     if (targetTile != '#') {
+       validMove = true;
+       player.move(direction);
+     }
+     
+   }
    return validMove;
-    /*const newX = player.position[0] + dx;
-    const newY = player.position[1] + dy;
-
+    /*
     if (newX >= 0 && newX < gameState.map[0].length && newY >= 0 && newY < gameState.map.length) {
         const targetTile = gameState.map[newY][newX];
         if (targetTile !== resources.icons['wall']) {
