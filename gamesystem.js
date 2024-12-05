@@ -1,3 +1,7 @@
+import * as resources from './resources.js';
+import * as entities from './entity.js';
+import * as properties from './property.js';
+
 export function gameState() {
     const state = {
         map: [],
@@ -40,6 +44,7 @@ export async function loadMap(filename) {
 
 // Validate the loaded map
 export function validateMap() {
+    console.log(gameState.map);
     if (gameState.map.length === 0) {
         throw new Error('Map is empty');
     }
@@ -70,14 +75,18 @@ export function validateMap() {
     console.log('Map validation passed');
 }
 
+function getObjectAt(position, map) {
+  return map[position[1]][position[0]];
+}
+
 // Handle player movement
 export function movePlayer(player, direction, bounds, map) {
    let targetPosition = getTarget(player.position, direction);
    let validMove = false;
    
    if (isInBounds(targetPosition, bounds)) {
-     const targetTile = map[targetPosition[0],targetPosition[1]]
-     if (targetTile != '#') {
+     const targetTile = getObjectAt(targetPosition, map);
+     if (targetTile !== resources.icons['wall']) {
        validMove = true;
        player.move(direction);
      }
