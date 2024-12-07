@@ -79,6 +79,12 @@ function getObjectAt(position, map) {
   return map[position[1]][position[0]];
 }
 
+function updateMapAt(resource, position, map) {
+  map[position[1]] = map[position[1]].substring(0, position[0]) 
+  + resource
+  + map[position[1]].substring(position[0] + 1);
+} 
+
 // Handle player movement
 export function movePlayer(player, direction, bounds, map) {
    let targetPosition = getTarget(player.position, direction);
@@ -88,7 +94,10 @@ export function movePlayer(player, direction, bounds, map) {
      const targetTile = getObjectAt(targetPosition, map);
      if (targetTile !== resources.icons['wall']) {
        validMove = true;
+       updateMapAt(resources.icons['floor'],player.position, map);
        player.move(direction);
+       updateMapAt(resources.icons['player'],targetPosition, map);
+       
      }
      
    }

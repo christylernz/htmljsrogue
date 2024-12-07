@@ -42,7 +42,12 @@ describe("Given a player and direction to move", () => {
     ];
     expect(game.movePlayer(player, direction , bounds, map)).toBe(false);
   });
-  /*it("then the current player location must be updated", () => {
-  });*/
+  it("then the map must be updated to show change in location", () => {
+    game.movePlayer(player, direction , bounds, map);
+    expect(map[0,0]).toBe('.');
+    expect(map[0,1]).toBe('@'); 
+  });
+  
+  
 });
 
