@@ -14,6 +14,7 @@ export function gameState() {
 }
 
 
+
 // Load map from file
 export async function loadMap(filename) {
     try {
@@ -35,8 +36,6 @@ export async function loadMap(filename) {
         }
 
         validateMap();
-        renderGame();
-        renderInventory();
     } catch (error) {
         console.error('Error loading map:', error.message + "\n" + error.stack);
     }
@@ -44,7 +43,6 @@ export async function loadMap(filename) {
 
 // Validate the loaded map
 export function validateMap() {
-    console.log(gameState.map);
     if (gameState.map.length === 0) {
         throw new Error('Map is empty');
     }

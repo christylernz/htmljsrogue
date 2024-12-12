@@ -14,6 +14,7 @@ export function createView() {
     document.getElementById("down").addEventListener("click", () => movePlayer(properties.Direction.DOWN));
     document.getElementById("left").addEventListener("click", () => movePlayer(properties.Direction.LEFT));
     document.getElementById("right").addEventListener("click", () => movePlayer(properties.Direction.RIGHT));
+
 }
 
 // Render the visible portion of the map
