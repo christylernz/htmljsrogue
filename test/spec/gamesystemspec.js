@@ -1,4 +1,4 @@
-//test/spec/gamespec.js
+//test/spec/gamesystemspec.js
 import * as game from "../../gamesystem.js";
 
 describe("Given a game system", () => {
