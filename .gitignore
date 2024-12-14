@@ -2,3 +2,5 @@ karma.conf.js
 package-lock.json
 node_modules/*
 package.json
+jsconfig.json
+eslint.config.mjs

@@ -22,8 +22,8 @@ describe("Given Player", () => {
 
       //MovePosition Property 
       validMover = jasmine.createSpyObj("movePosition", ["move"]);
-      validMover.move.and.returnValue([0,-1]);
-      
+      validMover.move.and.returnValue([0, -1]);
+
       player = new Player(validPosition, validDisplay, validMover);
     });
 
@@ -31,7 +31,7 @@ describe("Given Player", () => {
       expect(player.position).toBeDefined();  // Ensures getter and setter from position is available
       expect(player.render).toBeDefined();  // Ensures 'render' from display is available
       expect(player.move).toBeDefined();
-      
+
     });
 
     it("should delegate calls to the injected position and display methods", () => {
@@ -41,7 +41,7 @@ describe("Given Player", () => {
       player.position = [1, 1];
       expect(Object.getOwnPropertyDescriptor(validPosition, 'position').set).toHaveBeenCalledWith([1, 1]);
     });
-    
+
     it("then it should only accept a valid position and dispaly", () => {
       const invalidPosition = {
         set position(newPos) { }
@@ -54,7 +54,7 @@ describe("Given Player", () => {
       expect(() => {
         player = new Player(validPosition, invalidDisplay);
       }).toThrow(new Error("Display must implement render method"));
-      
+
       const invalidMover = {};
       expect(() => {
         player = new Player(validPosition, validDisplay, invalidMover);
