@@ -74,87 +74,60 @@ export function validateMap() {
 }
 
 function getObjectAt(position, map) {
-  return map[position[1]][position[0]];
+    return map[position[1]][position[0]];
 }
 
 function updateMapAt(resource, position, map) {
-  map[position[1]] = map[position[1]].substring(0, position[0]) 
-  + resource
-  + map[position[1]].substring(position[0] + 1);
-} 
+    map[position[1]] = map[position[1]].substring(0, position[0])
+        + resource
+        + map[position[1]].substring(position[0] + 1);
+}
 
 // Handle player movement
 export function movePlayer(player, direction, bounds, map) {
-   let targetPosition = getTarget(player.position, direction);
-   let validMove = false;
-   
-   if (isInBounds(targetPosition, bounds)) {
-     const targetTile = getObjectAt(targetPosition, map);
-     if (targetTile !== resources.icons['wall']) {
-       validMove = true;
-       updateMapAt(resources.icons['floor'],player.position, map);
-       player.move(direction);
-       updateMapAt(resources.icons['player'],targetPosition, map);
-       
-     }
-     
-   }
-   return validMove;
-    /*
-    if (newX >= 0 && newX < gameState.map[0].length && newY >= 0 && newY < gameState.map.length) {
-        const targetTile = gameState.map[newY][newX];
+    let targetPosition = getTarget(player.position, direction);
+    let validMove = false;
+
+    if (isInBounds(targetPosition, bounds)) {
+        const targetTile = getObjectAt(targetPosition, map);
         if (targetTile !== resources.icons['wall']) {
-            gameState.map[gameState.player.position[1]] = gameState.map[gameState.player.position[1]].substring(0, gameState.player.position[0]) + resources.icons['floor'] +
-                gameState.map[gameState.player.position[1]].substring(gameState.player.position[0] + 1);
-            gameState.player.position = [newX, newY];
-
-            // Handle object interactions
-            switch (targetTile) {
-                case resources.icons['coin']:
-                    gameState.inventory.push("Coin");
-                    break;
-                case resources.icons['potion']:
-                    gameState.inventory.push("Potion");
-                    break;
-                case resources.icons['chest']:
-                    alert("You found a chest!");
-                    break;
-            }
-
-            gameState.map[newY] = gameState.map[newY].substring(0, newX) + gameState.player.render() + gameState.map[newY].substring(newX + 1);
-            renderGame();
-            renderInventory();
+            validMove = true;
+            updateMapAt(resources.icons['floor'], player.position, map);
+            player.move(direction);
+            updateMapAt(resources.icons['player'], targetPosition, map);
         }
-    }*/
+
+    }
+    return validMove;
 }
 
 const DIRECTIONS = {
-  UP: [0,-1],
-  DOWN: [0,1], 
-  LEFT: [-1,0], 
-  RIGHT: [1,0]
+    UP: [0, -1],
+    DOWN: [0, 1],
+    LEFT: [-1, 0],
+    RIGHT: [1, 0]
 };
 
 function isInBounds(targetPosition, bounds) {
-  
-  let x, y, width, height;
-  x = bounds[0];
-  y = bounds[1];
-  width = bounds[2];
-  height = bounds[3];
-  
-  if (
-    targetPosition[0] < x 
-    || targetPosition[1] < y
-    || targetPosition[0] >= width
-    || targetPosition[1] >= height
-  ) {
-    return false;
-  }
-  return true;
+
+    let x, y, width, height;
+    x = bounds[0];
+    y = bounds[1];
+    width = bounds[2];
+    height = bounds[3];
+
+    if (
+        targetPosition[0] < x
+        || targetPosition[1] < y
+        || targetPosition[0] >= width
+        || targetPosition[1] >= height
+    ) {
+        return false;
+    }
+    return true;
 }
 
 function getTarget(position, direction) {
-  const directionVector = DIRECTIONS[direction];
-  return position.map((coord, index) => coord + directionVector[index]);
+    const directionVector = DIRECTIONS[direction];
+    return position.map((coord, index) => coord + directionVector[index]);
 }
