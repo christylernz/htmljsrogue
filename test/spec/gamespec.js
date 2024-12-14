@@ -6,11 +6,12 @@ describe("Given a game", () => {
     expect(game).toBeDefined();
   });
   describe("when it is created with a view and system", () => {
-    beforeEach(
-
-    );
+    let game, view, system;
+    beforeEach(function () {
+      view = jasmine.createSpyObj("view", ["update"]);
+    });
     it("then it initialises a new view and system", () => {
-
+      expect(view.update).toHaveBeenCalled();
     });
   });
 });
