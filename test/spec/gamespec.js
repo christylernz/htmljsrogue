@@ -6,12 +6,25 @@ describe("Given a game", () => {
     expect(game).toBeDefined();
   });
   describe("when it is created with a view and system", () => {
-    let game, view, system;
+    let validGame, validView, validSystem, map, mapGetterSpy;
     beforeEach(function () {
-      view = jasmine.createSpyObj("view", ["update"]);
+      validView = jasmine.createSpyObj("validView", ["updateMap"]);
+      validSystem = jasmine.createSpyObj("validSystem", ["loadMap"]);
+      map = [
+        "@",
+        "#"
+      ];
+      mapGetterSpy = jasmine.createSpy('mapGetter').and.returnValue(map);
+
+      Object.defineProperty(validSystem, 'map', {
+        get: mapGetterSpy
+      });
     });
     it("then it initialises a new view and system", () => {
-      expect(view.update).toHaveBeenCalled();
+      validGame = new game.Game(validView, validSystem);
+      expect(validSystem.loadMap).toHaveBeenCalled();
+      expect(mapGetterSpy).toHaveBeenCalled();
+      expect(validView.updateMap).toHaveBeenCalledWith(map);
     });
   });
 });

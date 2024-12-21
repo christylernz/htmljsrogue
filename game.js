@@ -9,7 +9,8 @@ export var Game = (function() {
   return function(view, system) {
     staticView = view;
     staticSystem = system;
-    
+    staticSystem.loadMap();
+    staticView.updateMap(staticSystem.map);
     return {
       view: staticView,
       system: staticSystem
