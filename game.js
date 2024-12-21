@@ -10,7 +10,8 @@ export var Game = (function() {
     staticView = view;
     staticSystem = system;
     staticSystem.loadMap();
-    staticView.updateMap(staticSystem.map);
+    staticView.renderMap(staticSystem.map);
+    staticView.renderInventory();
     return {
       view: staticView,
       system: staticSystem
