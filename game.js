@@ -13,4 +13,3 @@ export var Game = (function() {
     };
   }
 })();
-

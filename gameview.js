@@ -1,4 +1,39 @@
-export function createView() {
+import * as resources from './resources.js';
+
+export var GameView = (function() {
+  const viewHeight = 10;
+  const viewWidth = 10;
+  const renderMap = function(map) {
+    const gameContainer = document.getElementById("game-container");
+    let visibleMap = "";
+    let viewPosX = 2;
+    let viewPosY= 2; 
+    for (let y = 0; y < viewHeight; y++) {
+      for (let x = 0; x < viewWidth; x++) {
+        const mapX = viewPosX + x - Math.floor(viewWidth / 2);
+        const mapY = viewPosY + y - Math.floor(viewHeight / 2);
+  
+        if (mapX >= 0 && mapX < map[0].length && mapY >= 0 && mapY < gameState.map.length) {
+          visibleMap += map[mapY][mapX];
+        } else {
+          visibleMap += resources.icons['empty'];
+        }
+      }
+      visibleMap += "<br/>";
+    }
+  
+    gameContainer.innerHTML = visibleMap;
+  }
+  return function() {
+    //staticView.renderMap(staticSystem.map);
+    //staticView.renderInventory();
+    return {
+      renderMap
+    };
+  }
+})();
+
+export function addListeners() {
     // Set up event listeners for player movement
     document.addEventListener("keydown", (e) => {
         switch (e.key) {
@@ -18,26 +53,7 @@ export function createView() {
 }
 
 // Render the visible portion of the map
-export function renderGame() {
-    const gameContainer = document.getElementById("game-container");
-    let visibleMap = "";
-
-    for (let y = 0; y < gameState.viewHeight; y++) {
-        for (let x = 0; x < gameState.viewWidth; x++) {
-            const mapX = gameState.player.position[0] + x - Math.floor(gameState.viewWidth / 2);
-            const mapY = gameState.player.position[1] + y - Math.floor(gameState.viewHeight / 2);
-
-            if (mapX >= 0 && mapX < gameState.map[0].length && mapY >= 0 && mapY < gameState.map.length) {
-                visibleMap += gameState.map[mapY][mapX];
-            } else {
-                visibleMap += resources.icons['empty'];
-            }
-        }
-        visibleMap += "<br/>";
-    }
-
-    gameContainer.innerHTML = visibleMap;
-}
+ 
 
 export function renderInventory() {
     const inventoryContainer = document.getElementById("inventory");
