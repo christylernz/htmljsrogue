@@ -2,6 +2,40 @@ import * as resources from './resources.js';
 import * as entities from './entity.js';
 import * as properties from './property.js';
 
+
+export var GameSystem = (function() {
+  // Load map from file
+  const loadMap = async function (filename) {
+    try {
+      const response = await fetch(filename);
+      const mapText = await response.text();
+      gameState.map = mapText.trim().split('\n');
+  
+      // Find player starting position
+      for (let y = 0; y < gameState.map.length; y++) {
+        const x = gameState.map[y].indexOf(resources.icons['player']);
+        if (x !== -1) {
+          gameState.player = new entities.Player(
+            new properties.Position([x, y]),
+            new properties.DisplayChar(resources.icons['player']),
+            new properties.MovePosition()
+          );
+          break;
+        }
+      }
+  
+      validateMap();
+    } catch (error) {
+      console.error('Error loading map:', error.message + "\n" + error.stack);
+    }
+  };
+  return function () {
+    return {
+      loadMap
+    };
+  }
+})();
+
 export function gameState() {
     const state = {
         map: [],
@@ -15,31 +49,7 @@ export function gameState() {
 
 
 
-// Load map from file
-export async function loadMap(filename) {
-    try {
-        const response = await fetch(filename);
-        const mapText = await response.text();
-        gameState.map = mapText.trim().split('\n');
 
-        // Find player starting position
-        for (let y = 0; y < gameState.map.length; y++) {
-            const x = gameState.map[y].indexOf(resources.icons['player']);
-            if (x !== -1) {
-                gameState.player = new entities.Player(
-                    new properties.Position([x, y]),
-                    new properties.DisplayChar(resources.icons['player']),
-                    new properties.MovePosition()
-                );
-                break;
-            }
-        }
-
-        validateMap();
-    } catch (error) {
-        console.error('Error loading map:', error.message + "\n" + error.stack);
-    }
-}
 
 // Validate the loaded map
 export function validateMap() {

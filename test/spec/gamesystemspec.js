@@ -6,6 +6,15 @@ describe("Given a game system", () => {
     expect(game.movePlayer).toBeDefined();
   });
 });
+describe("when it is created", () => {
+  let system;
+  beforeEach(function () {
+    system = new game.GameSystem();
+  });
+  it("then it can load a map  ", () => {
+    expect(system.loadMap).toBeDefined();
+  });
+});
 
 describe("Given a player and direction to move", () => {
   let player, direction, validPosition, validMover, map, bounds;

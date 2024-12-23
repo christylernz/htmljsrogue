@@ -42,7 +42,7 @@ describe("Given Player", () => {
       expect(Object.getOwnPropertyDescriptor(validPosition, 'position').set).toHaveBeenCalledWith([1, 1]);
     });
 
-    it("then it should only accept a valid position and dispaly", () => {
+    it("then it should only accept a valid position and display", () => {
       const invalidPosition = {
         set position(newPos) { }
       }; // No setter
