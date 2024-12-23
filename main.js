@@ -4,7 +4,7 @@ import * as game from './game.js';
 
 export function InitializeGame() {
   let view = gameView.createView();
-  let system = gameSystem.loadMap('map.txt');
+  let system = new gameSystem.GameSystem();
   let mygame = new game.Game(view, system);
 }
 

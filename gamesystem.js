@@ -7,6 +7,7 @@ export var GameSystem = (function() {
   // Load map from file
   const loadMap = async function (filename) {
     try {
+      const filename = 'map.txt';
       const response = await fetch(filename);
       const mapText = await response.text();
       gameState.map = mapText.trim().split('\n');
