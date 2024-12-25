@@ -10,7 +10,7 @@ export var GameSystem = (function() {
       const filename = 'map.txt';
       const response = await fetch(filename);
       const mapText = await response.text();
-      gameState.map = mapText.trim().split('\n');
+      gameStatemap = mapText.trim().split('\n');
   
       // Find player starting position
       for (let y = 0; y < gameState.map.length; y++) {
@@ -30,9 +30,12 @@ export var GameSystem = (function() {
       console.error('Error loading map:', error.message + "\n" + error.stack);
     }
   };
+  let map;
   return function () {
+    map = '';
     return {
-      loadMap
+      loadMap, 
+      map
     };
   }
 })();

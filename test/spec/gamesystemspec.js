@@ -14,6 +14,9 @@ describe("when it is created", () => {
   it("then it can load a map  ", () => {
     expect(system.loadMap).toBeDefined();
   });
+  it("then it has a map", () => {
+    expect(system.map).toBeDefined();
+  });
 });
 
 describe("Given a player and direction to move", () => {
