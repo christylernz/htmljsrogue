@@ -16,7 +16,7 @@ describe("Given a game", () => {
       ];
       mapGetterSpy = jasmine.createSpy('mapGetter').and.returnValue(map);
 
-      Object.defineProperty(validSystem, 'map', {
+      Object.defineProperty(validSystem, 'visibleMap', {
         get: mapGetterSpy
       });
     });

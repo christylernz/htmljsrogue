@@ -4,43 +4,6 @@ import * as properties from './property.js';
 
 
 export var GameSystem = (function() {
-  // Load map from file
-  const loadMap = async function (filename) {
-    try {
-      const filename = 'map.txt';
-      const response = await fetch(filename);
-      const mapText = await response.text();
-      gameStatemap = mapText.trim().split('\n');
-  
-      // Find player starting position
-      for (let y = 0; y < gameState.map.length; y++) {
-        const x = gameState.map[y].indexOf(resources.icons['player']);
-        if (x !== -1) {
-          gameState.player = new entities.Player(
-            new properties.Position([x, y]),
-            new properties.DisplayChar(resources.icons['player']),
-            new properties.MovePosition()
-          );
-          break;
-        }
-      }
-  
-      validateMap();
-    } catch (error) {
-      console.error('Error loading map:', error.message + "\n" + error.stack);
-    }
-  };
-  let map;
-  return function () {
-    map = '';
-    return {
-      loadMap, 
-      map
-    };
-  }
-})();
-
-export function gameState() {
     const state = {
         map: [],
         player: null,
@@ -48,29 +11,79 @@ export function gameState() {
         viewHeight: 10,
         inventory: []
     };
-    return state;
-}
+    // Load map from file
+    const loadMap = async function (filename) {
+        try {
+        const filename = 'map.txt';
+        const response = await fetch(filename);
+        const mapText = await response.text();
+        state.map = mapText.trim().split('\n');
+    
+        // Find player starting position
+        for (let y = 0; y < state.map.length; y++) {
+            const x = state.map[y].indexOf(resources.icons['player']);
+            if (x !== -1) {
+            state.player = new entities.Player(
+                new properties.Position([x, y]),
+                new properties.DisplayChar(resources.icons['player']),
+                new properties.MovePosition()
+            );
+            break;
+            }
+        }
+    
+        validateMap(state.map);
+        } catch (error) {
+        console.error('Error loading map:', error.message + "\n" + error.stack);
+        }
+    };
+    const visibleMap = function () {
+        let visibleMap = "";
+        for (let y = 0; y < state.viewHeight; y++) {
+            for (let x = 0; x < state.viewWidth; x++) {
+                const mapX = state.player.position[0] + x - Math.floor(state.viewWidth / 2);
+                const mapY = state.player.position[1] + y - Math.floor(state.viewHeight / 2);
 
-
-
-
+                if (mapX >= 0 && mapX < state.map[0].length && mapY >= 0 && mapY < state.map.length) {
+                    visibleMap += state.map[mapY][mapX];
+                } else {
+                    visibleMap += resources.icons['empty'];
+                }
+            }
+            visibleMap += "<br/>";
+        }
+        return visibleMap;
+    };
+    let map,inventory;
+    return function () {
+        map = state.map;
+        inventory = state.inventory;
+        return {
+            loadMap, 
+            map,
+            inventory,
+            visibleMap,
+            movePlayer
+        };
+    }
+})();
 
 // Validate the loaded map
-export function validateMap() {
-    if (gameState.map.length === 0) {
+export function validateMap(map) {
+    if (map.length === 0) {
         throw new Error('Map is empty');
     }
 
-    const mapWidth = gameState.map[0].length;
+    const mapWidth = map[0].length;
     let playerCount = 0;
 
-    for (let y = 0; y < gameState.map.length; y++) {
-        if (gameState.map[y].length !== mapWidth) {
-            throw new Error(`Row ${y} has inconsistent length: want ${mapWidth} got ${gameState.map[y].length}`);
+    for (let y = 0; y < map.length; y++) {
+        if (map[y].length !== mapWidth) {
+            throw new Error(`Row ${y} has inconsistent length: want ${mapWidth} got ${map[y].length}`);
         }
 
         for (let x = 0; x < mapWidth; x++) {
-            const tile = gameState.map[y][x];
+            const tile = map[y][x];
             /*if (!Object.values(resources.icons) .includes(tile)) {
                 throw new Error(`Invalid character "${tile}" at position (${x}, ${y})`);
             }*/
@@ -99,6 +112,7 @@ function updateMapAt(resource, position, map) {
 
 // Handle player movement
 export function movePlayer(player, direction, bounds, map) {
+    console.log('Moving player', direction);
     let targetPosition = getTarget(player.position, direction);
     let validMove = false;
 

@@ -5,8 +5,12 @@ export var Game = (function() {
     staticView = view;
     staticSystem = system;
     staticSystem.loadMap();
-    staticView.renderMap(staticSystem.map);
-    staticView.renderInventory();
+    staticSystem.loadMap().then(() => {
+      staticView.renderMap(staticSystem.visibleMap());
+      staticView.renderInventory(staticSystem.inventory);
+      staticView.addListeners(staticSystem.movePlayer);
+    });
+
     return {
       view: staticView,
       system: staticSystem
