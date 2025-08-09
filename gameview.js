@@ -1,5 +1,5 @@
 import * as resources from './resources.js';
-import { Direction } from "../../property.js";
+import { Direction } from "./property.js";
 
 export var GameView = (function() {
   // Render the visible portion of the map
