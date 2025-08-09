@@ -2,14 +2,15 @@ export var Game = (function() {
   let staticView, staticSystem;
   
   const movePlayer = function(direction) {
-    staticSystem.movePlayer(direction);
-    staticView.renderMap(staticSystem.visibleMap());
+    staticSystem.handlePlayerInput(direction);
+    staticView.renderMap(staticSystem.visibleMap);
     staticView.renderInventory(staticSystem.inventory);
   };
 
   const loadGame = async function() {
     try {
       await staticSystem.loadMap();
+      staticView.addListeners(movePlayer)
       staticView.renderMap(staticSystem.visibleMap);
       staticView.renderInventory(staticSystem.inventory);
     } catch (error) {
@@ -25,6 +26,7 @@ export var Game = (function() {
     return {
       view: staticView,
       system: staticSystem
+
     };
   }
 })();

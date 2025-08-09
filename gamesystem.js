@@ -60,6 +60,14 @@ export var GameSystem = (function() {
         }
         return calculateMapVisible;
     };
+
+    const handlePlayerInput = function (direction){
+        if (!direction) {
+        console.log('No direction provided');
+        return ;
+        }
+        movePlayer(state.player, direction, [0, 0, state.map[0].length, state.map.length], state.map);
+    };
     let map,inventory;
     return function () {
         map = state.map;
@@ -71,7 +79,7 @@ export var GameSystem = (function() {
             get visibleMap() {
                 return getVisibleMap();
             },
-            movePlayer
+            handlePlayerInput
         };
     }
 })();
@@ -118,9 +126,12 @@ function updateMapAt(resource, position, map) {
         + map[position[1]].substring(position[0] + 1);
 }
 
+
+
 // Handle player movement
 export function movePlayer(player, direction, bounds, map) {
-    console.log('Moving player', direction);
+
+    console.log('Moving player ', direction);
     let targetPosition = getTarget(player.position, direction);
     let validMove = false;
 
