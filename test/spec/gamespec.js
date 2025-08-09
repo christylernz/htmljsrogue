@@ -20,8 +20,8 @@ describe("Given a game", () => {
         get: mapGetterSpy
       });
     });
-    it("then it initialises a new view and system", () => {
-      validGame = new game.Game(validView, validSystem);
+    it("then it initialises a new view and system", async () => {
+      validGame = await new game.Game(validView, validSystem);
       expect(validSystem.loadMap).toHaveBeenCalled();
       expect(mapGetterSpy).toHaveBeenCalled();
       expect(validView.renderMap).toHaveBeenCalledWith(map);

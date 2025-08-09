@@ -13,6 +13,7 @@ export var GameSystem = (function() {
     };
     // Load map from file
     const loadMap = async function (filename) {
+        console.log('Loading map from', filename);
         try {
         const filename = 'map.txt';
         const response = await fetch(filename);
@@ -37,8 +38,13 @@ export var GameSystem = (function() {
         console.error('Error loading map:', error.message + "\n" + error.stack);
         }
     };
-    const visibleMap = function () {
+    const getVisibleMap = function () {
         let calculateMapVisible = "";
+        if (!state.player) {
+            console.error('Player not found in the map');
+            return 'no player';
+        }
+
         for (let y = 0; y < state.viewHeight; y++) {
             for (let x = 0; x < state.viewWidth; x++) {
                 const mapX = state.player.position[0] + x - Math.floor(state.viewWidth / 2);
@@ -63,7 +69,7 @@ export var GameSystem = (function() {
             map,
             inventory,
             get visibleMap() {
-                return visibleMap();
+                return getVisibleMap();
             },
             movePlayer
         };
