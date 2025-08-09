@@ -14,7 +14,6 @@ export var GameView = (function() {
   return function() {
     //staticView.renderMap(staticSystem.map);
     //staticView.renderInventory();
-    addListeners();
     return {
       renderMap,
       renderInventory,
@@ -25,6 +24,7 @@ export var GameView = (function() {
 
 export function addListeners(movePlayer) {
     // Set up event listeners for player movement
+    console.log(movePlayer)
     document.addEventListener("keydown", (e) => {
         switch (e.key) {
             case "ArrowUp": movePlayer(Direction.UP); break;

@@ -38,21 +38,21 @@ export var GameSystem = (function() {
         }
     };
     const visibleMap = function () {
-        let visibleMap = "";
+        let calculateMapVisible = "";
         for (let y = 0; y < state.viewHeight; y++) {
             for (let x = 0; x < state.viewWidth; x++) {
                 const mapX = state.player.position[0] + x - Math.floor(state.viewWidth / 2);
                 const mapY = state.player.position[1] + y - Math.floor(state.viewHeight / 2);
 
                 if (mapX >= 0 && mapX < state.map[0].length && mapY >= 0 && mapY < state.map.length) {
-                    visibleMap += state.map[mapY][mapX];
+                    calculateMapVisible += state.map[mapY][mapX];
                 } else {
-                    visibleMap += resources.icons['empty'];
+                    calculateMapVisible += resources.icons['empty'];
                 }
             }
-            visibleMap += "<br/>";
+            calculateMapVisible += "<br/>";
         }
-        return visibleMap;
+        return calculateMapVisible;
     };
     let map,inventory;
     return function () {
@@ -62,7 +62,9 @@ export var GameSystem = (function() {
             loadMap, 
             map,
             inventory,
-            visibleMap,
+            get visibleMap() {
+                return visibleMap();
+            },
             movePlayer
         };
     }
