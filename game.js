@@ -14,6 +14,7 @@ export var Game = (function() {
       staticView.renderMap(staticSystem.visibleMap);
       staticView.renderInventory(staticSystem.inventory);
     } catch (error) {
+      console.error(error.message);
       console.error('Error loading game:', error);
     }
   }

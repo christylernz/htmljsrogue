@@ -8,7 +8,7 @@ describe("Given a game", () => {
   describe("when it is created with a view and system", () => {
     let validGame, validView, validSystem, map, mapGetterSpy;
     beforeEach(function () {
-      validView = jasmine.createSpyObj("validView", ["renderMap", "renderInventory"]);
+      validView = jasmine.createSpyObj("validView", ["renderMap", "renderInventory", "addListeners"]);
       validSystem = jasmine.createSpyObj("validSystem", ["loadMap"]);
       map = [
         "@",
@@ -26,6 +26,7 @@ describe("Given a game", () => {
       expect(mapGetterSpy).toHaveBeenCalled();
       expect(validView.renderMap).toHaveBeenCalledWith(map);
       expect(validView.renderInventory).toHaveBeenCalled();
+      expect(validView.addListeners).toHaveBeenCalled();
     });
   });
 });
