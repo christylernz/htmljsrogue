@@ -1,10 +1,12 @@
-Okay, this is an actionable development plan. We'll structure it around the "Echoes of the Constructor" concept with the looping world and persistent item upgrades.
+
 
 ---
 
 # Development Plan
 
-This document outlines an example of the core features and development tasks presented with user story formatting for clarity and checkboxes for tracking progress.
+This document outlines an example of the core features and development
+tasks presented with user story formatting for clarity and checkboxes
+for tracking progress.
 
 
 [ ] Task 1 - Tidy up the list and update the tasks where needed
@@ -12,61 +14,41 @@ This document outlines an example of the core features and development tasks pre
 
 ## **Phase 1: Core Loop & Basic Persistence**
 
-The goal of this phase is to establish the fundamental roguelike exploration, resource gathering, and the "Grand Reset" loop with basic Echo persistence.
+The goal of this phase is to establish the fundamental roguelike exploration, resource gathering, and the 'game reset' loop with a basic persistence of objects across resets.
 
 ### **Features to Develop:**
 
 *   ### **Basic World Generation & Player Movement**
-    *   **User Story:** As a Passerby, I want to move around a procedurally generated ASCII world so I can explore and interact with it.
+    *   **User Story:** I want to move around an ASCII map so I can explore and interact with it.
     *   **Sub-features:**
-        *   [ ] **F1.1: ASCII Rendering:** Render basic tiles (`.` floor, `#` wall, `@` player).
-        *   [ ] **F1.2: Player Movement:** Implement `WASD`/Arrow key movement, one tile per turn.
-        *   [ ] **F1.3: Basic Map Loading:** Implement simple map loading from a file  for a fixed size.
-        *   [ ] **F1.4:
-    *   **Tests:**
-        *   [ ] **T1.1.1:** Player `@` appears on screen.
-        *   [ ] **T1.1.2:** Player can move in all 4 cardinal directions.
-        *   [ ] **T1.1.3:** Each move updates `Turns Remaining` by 1.
-        *   [ ] **T1.1.4:** New map is loaded on each game start.
+        *   [x] **ASCII Rendering:** Render basic tiles (`.` floor, `#` wall, `@` player).
+        *   [x] **Player Movement:** Implement Arrow key movement, one tile per turn.
+        *   [x] **Basic Map Loading:** Implement simple map loading from a file  for a fixed size.
+        *   [ ] **Object Loading** Improve the simple map loading to allow create objects
 
 *   ### **Resource Gathering & Display**
-    *   **User Story:** As a Passerby, I want to collect basic resources from the world so I can accumulate them for later use.
+    *   **User Story:** I want to collect basic resources from the world so I can accumulate them for later use.
     *   **Sub-features:**
-        *   [ ] **F1.4: Resource Tile Generation:** Place common resources (`#` Wood Block, `$` Sparkle Dust, `^` Gear Bits) on the map.
-        *   [ ] **F1.5: Interaction (`E`) to Collect:** Implement `E` key to collect resources when on a resource tile, removing the resource from the map.
-        *   [ ] **F1.6: Resource Display:** Show current collected resources (e.g., `Wood: X, Dust: Y, Gears: Z`) in a UI panel.
-    *   **Tests:**
-        *   [ ] **T1.2.1:** Resource tiles appear on the map.
-        *   [ ] **T1.2.2:** Interacting with a resource tile adds it to inventory and removes it from the map.
-        *   [ ] **T1.2.3:** UI display updates correctly when resources are collected.
+        *   [ ] **Resource Tile Generation:** Place common resources (`#` Wood Block, `$` Sparkle Dust, `^` Gear Bits) on the map.
+        *   [ ] **Object Interaction:** Implement `E` key to collect resources when on a resource tile, removing the resource from the map.
+        *   [ ] **Resource Display:** Show current collected resources (e.g., `Wood: X, Dust: Y, Gears: Z`) in a UI panel.
 
-*   ### **Grand Reset Mechanic**
-    *   **User Story:** As a Passerby, I want the world to reset after a set number of turns so I can understand the cyclical nature of the game.
+*   ### **Game Reset**
+    *   **User Story:** I want the world to reset after a set number of turns so I can understand the cyclical nature of the game.
     *   **Sub-features:**
-        *   [ ] **F1.7: Turn Counter:** Display `Turns Remaining: XXX` and decrement it with each player action.
-        *   [ ] **F1.8: Reset Trigger:** When `Turns Remaining` reaches 0, trigger the "Grand Reset" event.
-        *   [ ] **F1.9: Reset Logic:** Clear current inventory (except persistent elements, to be added later), regenerate map, reset turn counter.
-        *   [ ] **F1.9: Basic Map Generation:** Implement a simple procedural map generation (e.g., drunken walk or simple room/corridor) for a fixed size.
-    *   **Tests:**
-        *   [ ] **T1.3.1:** Turn counter decrements correctly.
-        *   [ ] **T1.3.2:** When turns hit 0, a new map loads and turn counter resets.
-        *   [ ] **T1.3.3:** Resources collected in previous cycle are gone after reset.
+        *   [ ] **Turn Counter:** Display `Turns Remaining: XXX` and decrement it with each player action.
+        *   [ ] **Reset Trigger:** When `Turns Remaining` reaches 0, trigger the "Grand Reset" event.
+        *   [ ] **Reset Logic:** Clear current inventory (except persistent elements, to be added later), regenerate map, reset turn counter.
+        *   [ ] **Basic Map Generation:** Implement a simple procedural map generation (e.g., drunken walk or simple room/corridor) for a fixed size.
 
-
-*   ### **First Echo & Basic Persistence**
-    *   **User Story:** As a Passerby, I want to find a unique Echo that persists across resets so I can feel a sense of permanent progress.
+*   ### **Basic Persistence**
+    *   **User Story:** I want to find a unique Echo that persists across resets so I can feel a sense of permanent progress.
     *   **Sub-features:**
-        *   [ ] **F1.10: Single Echo Definition:** Define a single Echo (e.g., The Omnicube `Ω`) with a unique name and basic (initially null) effect.
-        *   [ ] **F1.11: Echo Placement:** Place one `Ω` randomly on the map during generation.
-        *   [ ] **F1.12: Echo Collection:** Interacting with `Ω` adds it to a "Collected Echoes (Current Cycle)" list.
-        *   [ ] **F1.13: Permanent Echo Collection:** At Grand Reset, move `Ω` from "Collected Echoes (Current Cycle)" to "Permanent Echo Collection" list.
-        *   [ ] **F1.14: Echo Re-spawn:** If `Ω` is in "Permanent Echo Collection," ensure it spawns randomly on the *next* map.
-    *   **Tests:**
-        *   [ ] **T1.4.1:** `Ω` appears on the map.
-        *   [ ] **T1.4.2:** Collecting `Ω` adds it to the current cycle list.
-        *   [ ] **T1.4.3:** After Grand Reset, `Ω` is in the permanent collection.
-        *   [ ] **T1.4.4:** In the next cycle, `Ω` appears randomly on the new map.
-
+        *   [ ] **Single Echo Definition:** Define a single Echo (e.g., The Omnicube `Ω`) with a unique name and basic (initially null) effect.
+        *   [ ] **Object Placement:** Place one `Ω` randomly on the map during generation.
+        *   [ ] **ObjectbCollection:** Interacting with `Ω` adds it to a "Collected Echoes (Current Cycle)" list.
+        *   [ ] **Permanent Echo Collection:** At Grand Reset, move `Ω` from "Collected Echoes (Current Cycle)" to "Permanent Echo Collection" list.
+        *   [ ] **Re-spawn:** If `Ω` is in "Permanent Echo Collection," ensure it spawns randomly on the *next* map.
 ---
 
 ## **Phase 2: Automation, Upgrades & Offline Progression**
@@ -76,52 +58,34 @@ This phase introduces the core idle mechanics, permanent upgrades, and the strat
 ### **Features to Develop:**
 
 *   ### **Pocket Workshop & Core Synthesizers**
-    *   **User Story:** As a Passerby, I want a permanent base to generate resources even when I'm offline, so I always make progress.
+    *   **User Story:** I want a permanent base to generate resources even when I'm offline, so I always make progress.
     *   **Sub-features:**
-        *   [ ] **F2.1: Pocket Workshop UI:** Implement a separate UI screen for the Pocket Workshop (accessed via hotkey from main game).
-        *   [ ] **F2.2: Core Synthesizer Definitions:** Define Wood Synthesizer (`W`), Dust Reactor (`D`), Gear Forge (`G`).
-        *   [ ] **F2.3: Initial Synthesizer Construction:** Allow initial construction of Tier 1 Synthesizers using common resources.
-        *   [ ] **F2.4: Passive Resource Generation:** Synthesizers generate resources at a fixed rate per second.
-        *   [ ] **F2.5: Offline Generation Logic:** Implement logic for Synthesizers to accumulate resources while the game is closed.
-        *   [ ] **F2.6: Synthesizer Upgrades:** Allow upgrading Synthesizer tiers (costs common resources), increasing their production rate.
-    *   **Tests:**
-        *   [ ] **T2.1.1:** Pocket Workshop UI is accessible.
-        *   [ ] **T2.1.2:** Synthesizers can be built/upgraded at cost.
-        *   [ ] **T2.1.3:** Resource counts increase passively while game is open.
-        *   [ ] **T2.1.4:** After closing and reopening game, accumulated offline resources are granted.
-        *   [ ] **T2.1.5:** Upgraded Synthesizers show increased production rate.
+        *   [ ] **Pocket Workshop UI:** Implement a separate UI screen for the Pocket Workshop (accessed via hotkey from main game).
+        *   [ ] **Core Synthesizer Definitions:** Define Wood Synthesizer (`W`), Dust Reactor (`D`), Gear Forge (`G`).
+        *   [ ] **Initial Synthesizer Construction:** Allow initial construction of Tier 1 Synthesizers using common resources.
+        *   [ ] **Passive Resource Generation:** Synthesizers generate resources at a fixed rate per second.
+        *   [ ] **Offline Generation Logic:** Implement logic for Synthesizers to accumulate resources while the game is closed.
+        *   [ ] **Synthesizer Upgrades:** Allow upgrading Synthesizer tiers (costs common resources), increasing their production rate.
 
 *   ### **Schematics & Deployed Automata**
-    *   **User Story:** As a Passerby, I want to deploy automated toy machines to gather resources in the world so I can free up my own turns for exploration.
+    *   **User Story:** I want to deploy automated toy machines to gather resources in the world so I can free up my own turns for exploration.
     *   **Sub-features:**
-        *   [ ] **F2.7: Schematic Discovery (`?`):** Implement `?` tiles on the map. Interacting with them grants an "Unidentified Schematic."
-        *   [ ] **F2.8: Schematic Deciphering:** In Pocket Workshop, allow "deciphering" Schematics (costs resources, consumes turns). Deciphered Schematics enable building Automata.
-        *   [ ] **F2.9: Automata Definitions:** Define Gear Automaton (`g`), Robo-Woodcutter (`r`), Dust Sweeper (`d`) with movement AI and gathering logic.
-        *   [ ] **F2.10: Automata Deployment:** Allow building and deploying Automata from Pocket Workshop into the current Toy World cycle (they appear on map and start moving).
-        *   [ ] **F2.11: Automata Logic:** Automata move towards and collect their specific resource type. Resources collected by Automata go to global storage.
-        *   [ ] **F2.12: Automata Reset:** Deployed Automata disappear on Grand Reset.
-    *   **Tests:**
-        *   [ ] **T2.2.1:** `?` tiles appear, interaction grants Schematic.
-        *   [ ] **T2.2.2:** Schematics can be deciphered at cost.
-        *   [ ] **T2.2.3:** Deciphered Schematics allow building Automata.
-        *   [ ] **T2.2.4:** Deployed Automata move and collect resources.
-        *   [ ] **T2.2.5:** Resources collected by Automata are added to player's global resource count.
-        *   [ ] **T2.2.6:** Automata are gone after Grand Reset.
-
-*   ### **Echo Upgrade & Knowledge Persistence**
-    *   **User Story:** As a Passerby, I want to upgrade my collected Echoes and for those upgrades to be permanently known across cycles so my Echoes become increasingly powerful.
+        *   [ ] **Schematic Discovery (`?`):** Implement `?` tiles on the map. Interacting with them grants an "Unidentified Schematic."
+        *   [ ] **Schematic Deciphering:** In Pocket Workshop, allow "deciphering" Schematics (costs resources, consumes turns). Deciphered Schematics enable building Automata.
+        *   [ ] **Automata Definitions:** Define Gear Automaton (`g`), Robo-Woodcutter (`r`), Dust Sweeper (`d`) with movement AI and gathering logic.
+        *   [ ] **Automata Deployment:** Allow building and deploying Automata from Pocket Workshop into the current Toy World cycle (they appear on map and start moving).
+        *   [ ] **Automata Logic:** Automata move towards and collect their specific resource type. Resources collected by Automata go to global storage.
+        *   [ ] **Automata Reset:** Deployed Automata disappear on Grand Reset.
+    
+*   ### ** Upgrade & Knowledge Persistence**
+    *   **User Story:**  I want to upgrade my collected Echoes and for those upgrades to be permanently known across cycles so my Echoes become increasingly powerful.
     *   **Sub-features:**
-        *   [ ] **F2.13: Echo Upgrade Paths:** Define 2-3 upgrade tiers/paths for the initial `Ω` Echo (costs common resources).
-        *   [ ] **F2.14: Echo Upgrade UI:** In Pocket Workshop, when an Echo is in "Collected Echoes (Current Cycle)," show its upgrade options.
-        *   [ ] **F2.15: Apply Echo Upgrade:** Allow spending resources to apply an upgrade to a collected Echo.
-        *   [ ] **F2.16: Permanent Upgrade Knowledge:** When an Echo upgrade is applied, mark that specific upgrade path/tier as "Learned" for that Echo globally.
-        *   [ ] **F2.17: Automatic Learned Upgrades:** On subsequent cycles, when `Ω` is re-collected, automatically apply any "Learned" upgrades for free.
-        *   [ ] **F2.18: Echo Effects:** Implement initial effect for `Ω` (e.g., `+X%` Global Resource Gain for current cycle), applying its base and learned upgrade values.
-    *   **Tests:**
-        *   [ ] **T2.3.1:** `Ω` can be upgraded at cost.
-        *   [ ] **T2.3.2:** Upgraded `Ω` shows increased effect in current cycle.
-        *   [ ] **T2.3.3:** After Grand Reset, when `Ω` is re-collected in a new cycle, its learned upgrade is automatically applied.
-        *   [ ] **T2.3.4:** The effect of `Ω` (and its learned upgrades) is correctly applied to resource generation.
+        *   [ ] **Echo Upgrade Paths:** Define 2-3 upgrade tiers/paths for the initial `Ω` Echo (costs common resources).
+        *   [ ] **Echo Upgrade UI:** In Pocket Workshop, when an Echo is in "Collected Echoes (Current Cycle)," show its upgrade options.
+        *   [ ] **Apply Echo Upgrade:** Allow spending resources to apply an upgrade to a collected Echo.
+        *   [ ] **Permanent Upgrade Knowledge:** When an Echo upgrade is applied, mark that specific upgrade path/tier as "Learned" for that Echo globally.
+        *   [ ] **Automatic Learned Upgrades:** On subsequent cycles, when `Ω` is re-collected, automatically apply any "Learned" upgrades for free.
+        *   [ ] **Echo Effects:** Implement initial effect for `Ω` (e.g., `+X%` Global Resource Gain for current cycle), applying its base and learned upgrade values.
 
 ---
 
