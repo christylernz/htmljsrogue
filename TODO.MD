@@ -4,17 +4,19 @@ This document outlines an example of the core features and development tasks pre
 
 ## General Tasks
 
-[x] Tidy up the list and update the tasks where needed.
-[ ] Consider using a given when then structure for the tests.
-[ ] Decide how debug mode shows, maybe if you're viewing it from localhost? Or include a keystroke?
-[ ] Review Basic UI & Feedback and maybe make it a seperate phase, but it at least needs task updates.
+* [x] Tidy up the list and update the tasks where needed.
+* [ ] Refactor code to have a clear server and client split
+* [ ] Consider using a given when then structure for the tests.
+* [ ] Decide how debug mode shows, maybe if you're viewing it from localhost? Or include a keystroke?
+* [ ] Review Basic UI & Feedback and maybe make it a seperate phase, but it at least needs task updates.
 
 ## Future Features to Consider
 
-[ ] Resource gatherers that can move and collect rather than collection from a static resource
-[ ] Persistent Objects (current called echoes) can be upgraded and the upgrades persist across resets
-[ ] Include a way for the player to become aware that they are near to a persistent object they have had or interacted with before.
-[ ] Is there a way to write a story about the objects so across resets the player can see the 'history' of an object.
+* [ ] Resource gatherers that can move and collect rather than collection from a static resource
+* [ ] Persistent Objects (current called echoes) can be upgraded and the upgrades persist across resets
+* [ ] Include a way for the player to become aware that they are near to a persistent object they have had or interacted with before.
+* [ ] Look at how to streaming of objects using containers
+* [ ] Is there a way to write a story about the objects so across resets the player can see the 'history' of an object.
 
 ---
 
@@ -32,8 +34,9 @@ The goal of this phase is to establish the fundamental roguelike exploration, re
       * [ ] Able to see a debug mode maybe
     * [x] **Player Movement:** Implement Arrow key movement, one tile per turn.
       * [ ] Player can move in all 4 cardinal directions.
+      * [ ] View of the map does not relay on players
     * [x] **Basic Map Loading:** Implement simple map loading from a file  for a fixed size.
-      * [ ] New map is loaded on each game start.
+      * [ ] New map is loaded on each game start position. Player and view can change independently..
     * [ ] **Object Loading** Improve the simple map loading to allow create objects
       * [ ] insert test here
 
@@ -72,7 +75,12 @@ The goal of this phase is to establish the fundamental roguelike exploration, re
 
 ---
 
-## **Phase 2: Automation, Upgrades & Offline Progression**
+## **Phase 2: Basic editing tools**
+
+This phase focuses on building an interface to create, update and delete maps and objects
+ phase 3 splitting server and client library 
+
+## **Phase 3: Automation, Upgrades & Offline Progression**
 
 This phase introduces the core idle mechanics, permanent upgrades, and the strategic layer of Echo development.
 
@@ -108,7 +116,7 @@ This phase introduces the core idle mechanics, permanent upgrades, and the strat
 
 ---
 
-## **Phase 3: Lore, More Echoes & Game Polish**
+## **Phase 4: Lore, More Echoes & Game Polish**
 
 This phase expands the content, introduces the narrative, and polishes the user experience.
 
@@ -133,7 +141,7 @@ This phase expands the content, introduces the narrative, and polishes the user 
     * [ ] **Random Echo Spawns:** During map generation, randomly select and place a set number of Echoes based on their rarity and player's permanent collection.
       * [ ] New Echoes can be added to the permanent collection and will then reappear in subsequent cycles.
 
-* ### **Basic UI & Feedback**
+* ### **Polished UI & Improved Feedback**
 
   * **User Story:** I want clear visual feedback on my actions and game state so I can understand what's happening.
     * [ ] **Turn Counter Visibility:** Prominent display of `Turns Remaining`.
@@ -146,7 +154,7 @@ This phase expands the content, introduces the narrative, and polishes the user 
 
 ---
 
-## **Phase 4: Advanced Gameplay & End Game**
+## **Phase 5: Advanced Gameplay & End Game**
 
 Introducing deeper mechanics, greater strategy, and a sense of progression towards a significant long-term goal.
 
