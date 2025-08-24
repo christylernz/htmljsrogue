@@ -1,9 +1,10 @@
 import * as resources from './resources.js';
 import * as entities from './entity.js';
 import * as properties from './property.js';
-
+import * as debug from './debug.js';
 
 export var GameSystem = (function() {
+    const myDebug = new debug.Debug();
     const state = {
         map: [],
         player: null,
@@ -15,27 +16,28 @@ export var GameSystem = (function() {
     const loadMap = async function (filename) {
         console.log('Loading map from', filename);
         try {
-        const filename = 'map.txt';
-        const response = await fetch(filename);
-        const mapText = await response.text();
-        state.map = mapText.trim().split('\n');
-    
-        // Find player starting position
-        for (let y = 0; y < state.map.length; y++) {
-            const x = state.map[y].indexOf(resources.icons['player']);
-            if (x !== -1) {
-            state.player = new entities.Player(
-                new properties.Position([x, y]),
-                new properties.DisplayChar(resources.icons['player']),
-                new properties.MovePosition()
-            );
-            break;
+            const filename = 'map.txt';
+            const response = await fetch(filename);
+            const mapText = await response.text();
+            state.map = mapText.trim().split('\n');
+        
+            // Find player starting position
+            for (let y = 0; y < state.map.length; y++) {
+                const x = state.map[y].indexOf(resources.icons['player']);
+                if (x !== -1) {
+                state.player = new entities.Player(
+                    new properties.Position([x, y]),
+                    new properties.DisplayChar(resources.icons['player']),
+                    new properties.MovePosition()
+                );
+                break;
+                }
             }
-        }
-    
-        validateMap(state.map);
+        
+            validateMap(state.map);
+            myDebug.init(state);
         } catch (error) {
-        console.error('Error loading map:', error.message + "\n" + error.stack);
+            console.error('Error loading map:', error.message + "\n" + error.stack);
         }
     };
     const getVisibleMap = function () {

@@ -25,6 +25,18 @@
     gap: 10px;
     width: 25%;
   }
+  
+  #debug {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 200;
+    overflow-y: auto;
+    display: block;
+    background: lightgray;
+  }
+  
   .item {
    border: 1px solid;
    padding: 10px;

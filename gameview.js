@@ -1,11 +1,16 @@
 import * as resources from './resources.js';
+import * as debug from './debug.js';
+
 import { Direction } from "./property.js";
 
 export var GameView = (function() {
+  let myDebug = new debug.Debug();
+  
   // Render the visible portion of the map
   const renderMap = function(map) {
     const gameContainer = document.getElementById("game-container");
     gameContainer.innerHTML = map;
+    myDebug.update();
   };
   const renderInventory = function(inventory) {
     const inventoryContainer = document.getElementById("inventory");

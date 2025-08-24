@@ -17,7 +17,7 @@ This document outlines an example of the core features and development tasks pre
 * [ ] Include a way for the player to become aware that they are near to a persistent object they have had or interacted with before.
 * [ ] Look at how to streaming of objects using containers
 * [ ] Is there a way to write a story about the objects so across resets the player can see the 'history' of an object.
-
+* [ ] Is it possible to create moving containers for things like cars trains etc. 
 ---
 
 ## **Phase 1: Core Loop & Basic Persistence**
@@ -29,11 +29,11 @@ The goal of this phase is to establish the fundamental roguelike exploration, re
   * **User Story:** I want to move around an ASCII map so I can explore and interact with it.
     * [x] **ASCII Rendering:** Render basic tiles (`.` floor, `#` wall, `@` player).
       * [x] Player `@` appears on screen.
-    * [ ] **Render Basic UI**
+    * [x] **Render Basic UI**
       * [x] Able to view basic components of the user interface
-      * [ ] Able to see a debug mode maybe
+      * [x] Able to see a debug mode maybe
     * [x] **Player Movement:** Implement Arrow key movement, one tile per turn.
-      * [ ] Player can move in all 4 cardinal directions.
+      * [ ] o Player can move in all 4 cardinal directions.
       * [ ] View of the map does not relay on players
     * [x] **Basic Map Loading:** Implement simple map loading from a file  for a fixed size.
       * [ ] New map is loaded on each game start position. Player and view can change independently..
