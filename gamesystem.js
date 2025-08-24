@@ -25,12 +25,12 @@ export var GameSystem = (function() {
             for (let y = 0; y < state.map.length; y++) {
                 const x = state.map[y].indexOf(resources.icons['player']);
                 if (x !== -1) {
-                state.player = new entities.Player(
-                    new properties.Position([x, y]),
-                    new properties.DisplayChar(resources.icons['player']),
-                    new properties.MovePosition()
-                );
-                break;
+                    state.player = new entities.Player(
+                        new properties.Position([x, y]),
+                        new properties.DisplayChar(resources.icons['player']),
+                        new properties.MovePosition()
+                    );
+                    break;
                 }
             }
         
@@ -65,8 +65,8 @@ export var GameSystem = (function() {
 
     const handlePlayerInput = function (direction){
         if (!direction) {
-        console.log('No direction provided');
-        return ;
+            console.error('No direction provided');
+            return ;
         }
         movePlayer(state.player, direction, [0, 0, state.map[0].length, state.map.length], state.map);
     };
@@ -132,8 +132,6 @@ function updateMapAt(resource, position, map) {
 
 // Handle player movement
 export function movePlayer(player, direction, bounds, map) {
-
-    console.log('Moving player ', direction);
     let targetPosition = getTarget(player.position, direction);
     let validMove = false;
 
@@ -145,7 +143,6 @@ export function movePlayer(player, direction, bounds, map) {
             player.move(direction);
             updateMapAt(resources.icons['player'], targetPosition, map);
         }
-
     }
     return validMove;
 }

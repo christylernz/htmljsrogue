@@ -33,7 +33,7 @@ The goal of this phase is to establish the fundamental roguelike exploration, re
       * [x] Able to view basic components of the user interface
       * [x] Able to see a debug mode maybe
     * [x] **Player Movement:** Implement Arrow key movement, one tile per turn.
-      * [ ] o Player can move in all 4 cardinal directions.
+      * [ ] Player can move in all 4 cardinal directions.
       * [ ] View of the map does not relay on players
     * [x] **Basic Map Loading:** Implement simple map loading from a file  for a fixed size.
       * [ ] New map is loaded on each game start position. Player and view can change independently..
