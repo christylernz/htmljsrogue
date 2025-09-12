@@ -9,7 +9,9 @@ This document outlines an example of the core features and development tasks pre
 * [ ] Consider using a given when then structure for the tests.
 * [ ] Decide how debug mode shows, maybe if you're viewing it from localhost? Or include a keystroke?
 * [ ] Review Basic UI & Feedback and maybe make it a seperate phase, but it at least needs task updates.
-
+* [ ] Look at using Web components for a learning opportunity 
+* [ ] Decide on whether to use javascript Proxy with decorators or event system to replace render functions everywhere
+* [ ] Consider introducing MVVM for interface 
 ## Future Features to Consider
 
 * [ ] Resource gatherers that can move and collect rather than collection from a static resource
@@ -32,9 +34,10 @@ The goal of this phase is to establish the fundamental roguelike exploration, re
     * [x] **Render Basic UI**
       * [x] Able to view basic components of the user interface
       * [x] Able to see a debug mode maybe
-    * [x] **Player Movement:** Implement Arrow key movement, one tile per turn.
-      * [ ] Player can move in all 4 cardinal directions.
-      * [ ] View of the map does not relay on players
+    * [ ] **Player Movement:** Implement Arrow key movement, one tile per turn.
+      * [x] Player can move in all 4 cardinal directions.
+      * [ ] Movement handled in its own system
+      * [ ] View of the map does not rely on players position
     * [x] **Basic Map Loading:** Implement simple map loading from a file  for a fixed size.
       * [ ] New map is loaded on each game start position. Player and view can change independently..
     * [ ] **Object Loading** Improve the simple map loading to allow create objects
@@ -78,7 +81,8 @@ The goal of this phase is to establish the fundamental roguelike exploration, re
 ## **Phase 2: Basic editing tools**
 
 This phase focuses on building an interface to create, update and delete maps and objects
- phase 3 splitting server and client library 
+ phase 3 splitting server and client library. 
+ also include story telling tools
 
 ## **Phase 3: Automation, Upgrades & Offline Progression**
 
@@ -120,7 +124,7 @@ This phase introduces the core idle mechanics, permanent upgrades, and the strat
 
 This phase expands the content, introduces the narrative, and polishes the user experience.
 
-* ### **Lore Fragments & Chronicle Log**
+* ### **Lore Fragments and story telling**
 
   * **User Story:** I want to discover fragments of the world's story that persist across resets so I can uncover the mystery.
     * [ ] **Lore Fragment Placement (`L`):** Place `L` tiles randomly on the map.
@@ -152,9 +156,20 @@ This phase expands the content, introduces the narrative, and polishes the user 
     * [ ] **Basic Sound Effects:** Simple sounds for movement, interaction, resource collection, Grand Reset.
       * [ ] Sound effects play as expected.
 
+ * ### **Endgame Progression**
+
+  * **User Story:** I want to feel like I'm building towards a significant long-term goal beyond just collecting Echoes, and learn the full story.
+    * [ ] **"Prime Echoes" Set Bonus:** Implement a special set of highly rare Echoes. Collecting all of them unlocks a powerful, permanent global bonus and a major Lore Revelation.
+    * [ ] **Grand Machine Anomaly (`!M`):** A special, recurring "Anomaly" that gradually reveals the mechanics of the "Grand Reset" and offers a choice to influence the next cycle (e.g., higher chance of specific Echoes, but fewer turns).
+  * **Tests:**
+    * [ ] Collecting all Prime Echoes triggers the set bonus and lore.
+    * [ ] `!M` appears and offers choices.
+    * [ ] The final narrative revelation triggers at the appropriate time.
+  
+* 
 ---
 
-## **Phase 5: Advanced Gameplay & End Game**
+## **Phase 5: Future Gameplay**
 
 Introducing deeper mechanics, greater strategy, and a sense of progression towards a significant long-term goal.
 
@@ -184,14 +199,5 @@ Introducing deeper mechanics, greater strategy, and a sense of progression towar
     * [ ] `+` modules can be activated and apply their buffs.
     * [ ] Rare resource deposits appear and yield more resources.
 
-* ### **Endgame Progression & Deeper Lore**
-
-  * **User Story:** I want to feel like I'm building towards a significant long-term goal beyond just collecting Echoes, and learn the full story.
-    * [ ] **"Prime Echoes" Set Bonus:** Implement a special set of highly rare Echoes. Collecting all of them unlocks a powerful, permanent global bonus and a major Lore Revelation.
-    * [ ] **Grand Machine Anomaly (`!M`):** A special, recurring "Anomaly" that gradually reveals the mechanics of the "Grand Reset" and offers a choice to influence the next cycle (e.g., higher chance of specific Echoes, but fewer turns).
-  * **Tests:**
-    * [ ] Collecting all Prime Echoes triggers the set bonus and lore.
-    * [ ] `!M` appears and offers choices.
-    * [ ] The final narrative revelation triggers at the appropriate time.
 
 ---

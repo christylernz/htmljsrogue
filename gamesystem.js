@@ -147,6 +147,7 @@ export function movePlayer(player, direction, bounds, map) {
     return validMove;
 }
 
+
 const DIRECTIONS = {
     UP: [0, -1],
     DOWN: [0, 1],
@@ -176,4 +177,4 @@ function isInBounds(targetPosition, bounds) {
 function getTarget(position, direction) {
     const directionVector = DIRECTIONS[direction];
     return position.map((coord, index) => coord + directionVector[index]);
-}
+} 
