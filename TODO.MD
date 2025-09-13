@@ -37,13 +37,16 @@ The goal of this phase is to establish the fundamental roguelike exploration, re
     * [ ] **Player Movement:** Implement Arrow key movement, one tile per turn.
       * [x] Player can move in all 4 cardinal directions.
       * [ ] Movement handled in its own system
+      * [ ] When player moves into an obstacle, the move is prevented 
+      * [ ] Map tile is visible where after a player moves off it
       * [ ] View of the map does not rely on players position
     * [x] **Basic Map Loading:** Implement simple map loading from a file  for a fixed size.
       * [ ] New map is loaded on each game start position. Player and view can change independently..
     * [ ] **Object Loading** Improve the simple map loading to allow create objects
-      * [ ] insert test here
+      * [ ] When player moves into a collidable object then movement is blovked
+      * [ ] When a player is near an interact able object then a new interaction is visible
 
-* ### **Resource Gathering & Display**
+* ### ** Object Collection, Resource Gathering & Display**
 
   * **User Story:** I want to collect basic resources from the world so I can accumulate them for later use.
     * [ ] **Resource Tile Generation:** Place common resources (`#` Wood Block, `$` Sparkle Dust, `^` Gear Bits) on the map.
