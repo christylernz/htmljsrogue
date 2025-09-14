@@ -5,6 +5,7 @@ This document outlines an example of the core features and development tasks pre
 ## General Tasks
 
 * [x] Tidy up the list and update the tasks where needed.
+* [ ] Remove main.js if possible 
 * [ ] Refactor code to have a clear server and client split
 * [ ] Consider using a given when then structure for the tests.
 * [ ] Decide how debug mode shows, maybe if you're viewing it from localhost? Or include a keystroke?

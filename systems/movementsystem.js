@@ -1,7 +1,7 @@
-import * as resources from './resources.js';
-import * as entities from './entity.js';
-import * as properties from './property.js';
-import * as debug from './debug.js';
+import * as resources from '../resources.js';
+import * as entities from '../entity.js';
+import * as properties from '../property.js';
+import * as debug from '../debug.js';
 
 export var MovementSystem = (function() {
     // move player object
